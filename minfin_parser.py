@@ -4,6 +4,9 @@ import requests
 
 
 url = 'https://minfin.com.ua/ua/currency/usd/'
+usd_retail_json = 'https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json'
+usd_auction_json = 'https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json'
+usd_nbu_json = 'https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594214142'
 
 
 response = requests.get(url=url)
@@ -32,6 +35,12 @@ print(len(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr')))
 # sub_div_1 = div.find(attrs={'class': 'mfz-container'})
 # print(sub_div_1)
 
+usd_retail_data = requests.get('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json').json()
+print(usd_retail_data)
+print(usd_retail_data[1]['date'])
+print('\n**************************\n')
 
+usd_nbu_data = requests.get(usd_nbu_json).json()
+print(usd_nbu_data)
 
 
