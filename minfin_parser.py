@@ -25,6 +25,8 @@ div_mfm_grey_bg_tbody = div_mfm_grey_bg.find('tbody')
 
 print(div_mfm_grey_bg_tbody)
 print('\n**************************\n')
+print(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr'))
+print(len(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr')))
 
 # print(div)
 # sub_div_1 = div.find(attrs={'class': 'mfz-container'})
