@@ -1,6 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from utilits.log_settings import log
+import configs
 from bs4 import BeautifulSoup
 import requests
 import datetime
@@ -12,19 +13,13 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-usd_currency = 'https://minfin.com.ua/ua/currency/usd/'
-usd_retail_json = 'https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json'
-usd_auction_json = 'https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json'
-usd_nbu_json = 'https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594214142'
-
-
 usd_retail_data = requests.get('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json').json()
 print(usd_retail_data)
 print(usd_retail_data[1]['date'])
 print('{}\n'.format('*'*50))
 print(datetime.datetime.strptime(usd_retail_data[1]['date'], '%Y-%m-%d'))
 
-usd_nbu_data = requests.get(usd_nbu_json).json()
+usd_nbu_data = requests.get(configs.usd_nbu_json).json()
 print(usd_nbu_data)
 
 
@@ -98,5 +93,5 @@ def get_usd_currency(soup):
 
 
 if __name__ == '__main__':
-    soup = request_to_minfin(url=usd_currency)
+    soup = request_to_minfin(url=configs.usd_currency)
     get_usd_currency(soup=soup)
