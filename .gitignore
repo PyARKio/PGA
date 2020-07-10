@@ -1,3 +1,4 @@
-.idea/*
+.idea
 *.pyc
-back_end/__pycache__
+MinFin/__pycache__
+utilits/__pycache__
