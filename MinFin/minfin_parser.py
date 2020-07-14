@@ -13,6 +13,18 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
+usd_currency = 'https://minfin.com.ua/ua/currency/usd/'
+usd_retail_json = 'https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json'
+usd_auction_json = 'https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json'
+usd_nbu_json = 'https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594720251'
+
+usd_visa = 'https://minfin.com.ua/ua/currency/visa/usd/'
+usd_mastercard = 'https://minfin.com.ua/ua/currency/mastercard/usd/'
+usd_visa_json = 'https://minfin.com.ua/ua/data/currency/card/visa.usd.rates.full.json'
+usd_mastercard_json = 'https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json'
+usd_cards_rates = 'https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json'
+
+
 usd_retail_data = requests.get('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json').json()
 log.info(usd_retail_data)
 log.info(usd_retail_data[1]['date'])
@@ -21,6 +33,62 @@ log.info(datetime.datetime.strptime(usd_retail_data[1]['date'], '%Y-%m-%d'))
 
 usd_nbu_data = requests.get(configs.usd_nbu_json).json()
 log.info(usd_nbu_data)
+
+
+def get_usd_retail(div_mfm_grey_bg_tbody):
+    tds = div_mfm_grey_bg_tbody.findAll('tr')[0].findAll('td')
+    log.info(tds[0].get('data-title'))
+    log.info(tds[0].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[1].get('data-title'))
+    log.info(tds[1].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[2].get('data-title'))
+    log.info(tds[2].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[3].get('data-title'))
+    log.info(tds[3].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info('{}\n'.format('*' * 50))
+
+
+def get_usd_auction(div_mfm_grey_bg_tbody):
+    tds = div_mfm_grey_bg_tbody.findAll('tr')[1].findAll('td')
+    log.info(tds[0].get('data-title'))
+    log.info(tds[0].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[1].get('data-title'))
+    log.info(tds[1].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[2].get('data-title'))
+    log.info(tds[2].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[3].get('data-title'))
+    log.info(tds[3].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info('{}\n'.format('*' * 50))
+
+
+def get_usd_nbu(div_mfm_grey_bg_tbody):
+    tds = div_mfm_grey_bg_tbody.findAll('tr')[2].findAll('td')
+    log.info(tds[0].get('data-title'))
+    log.info(tds[0].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[1].get('data-title'))
+    log.info(tds[1].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info(tds[2].get('data-title'))
+    log.info(tds[2].text)
+    log.info('{}\n'.format('*' * 50))
+    log.info('{}\n'.format('*' * 50))
+
+
+def get_usd_visa():
+    pass
+
+
+def get_usd_mastercard():
+    pass
 
 
 def request_to_minfin(url=None):
@@ -53,47 +121,9 @@ def get_usd_currency(soup):
     # print(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr'))
     # print(len(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr')))
 
-    tds = div_mfm_grey_bg_tbody.findAll('tr')[0].findAll('td')
-    log.info(tds[0].get('data-title'))
-    log.info(tds[0].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[1].get('data-title'))
-    log.info(tds[1].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[2].get('data-title'))
-    log.info(tds[2].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[3].get('data-title'))
-    log.info(tds[3].text)
-    log.info('{}\n'.format('*'*50))
-    log.info('{}\n'.format('*'*50))
-
-    tds = div_mfm_grey_bg_tbody.findAll('tr')[1].findAll('td')
-    log.info(tds[0].get('data-title'))
-    log.info(tds[0].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[1].get('data-title'))
-    log.info(tds[1].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[2].get('data-title'))
-    log.info(tds[2].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[3].get('data-title'))
-    log.info(tds[3].text)
-    log.info('{}\n'.format('*'*50))
-    log.info('{}\n'.format('*'*50))
-
-    tds = div_mfm_grey_bg_tbody.findAll('tr')[2].findAll('td')
-    log.info(tds[0].get('data-title'))
-    log.info(tds[0].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[1].get('data-title'))
-    log.info(tds[1].text)
-    log.info('{}\n'.format('*'*50))
-    log.info(tds[2].get('data-title'))
-    log.info(tds[2].text)
-    log.info('{}\n'.format('*'*50))
-    log.info('{}\n'.format('*'*50))
+    get_usd_retail(div_mfm_grey_bg_tbody)
+    get_usd_auction(div_mfm_grey_bg_tbody)
+    get_usd_nbu(div_mfm_grey_bg_tbody)
 
 
 if __name__ == '__main__':
