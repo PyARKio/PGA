@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 from utilits.log_settings import log
 from MinFin import minfin_parser
+from OutputPoints import TelegramBot
 import configs
 
 
