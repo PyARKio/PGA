@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from utilits.log_settings import log
-import configs
+# import configs
 from bs4 import BeautifulSoup
 import requests
 import datetime
@@ -31,7 +31,7 @@ log.info(usd_retail_data[1]['date'])
 log.info('{}\n'.format('*'*50))
 log.info(datetime.datetime.strptime(usd_retail_data[1]['date'], '%Y-%m-%d'))
 
-usd_nbu_data = requests.get(configs.usd_nbu_json).json()
+usd_nbu_data = requests.get(usd_nbu_json).json()
 log.info(usd_nbu_data)
 
 
