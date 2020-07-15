@@ -25,14 +25,14 @@ usd_mastercard_json = 'https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.
 usd_cards_rates = 'https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json'
 
 
-usd_retail_data = requests.get('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json').json()
-log.info(usd_retail_data)
-log.info(usd_retail_data[1]['date'])
-log.info('{}\n'.format('*'*50))
-log.info(datetime.datetime.strptime(usd_retail_data[1]['date'], '%Y-%m-%d'))
-
-usd_nbu_data = requests.get(usd_nbu_json).json()
-log.info(usd_nbu_data)
+# usd_retail_data = requests.get('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json').json()
+# log.info(usd_retail_data)
+# log.info(usd_retail_data[1]['date'])
+# log.info('{}\n'.format('*'*50))
+# log.info(datetime.datetime.strptime(usd_retail_data[1]['date'], '%Y-%m-%d'))
+#
+# usd_nbu_data = requests.get(usd_nbu_json).json()
+# log.info(usd_nbu_data)
 
 
 def get_usd_retail(div_mfm_grey_bg_tbody):
@@ -118,12 +118,43 @@ def get_usd_currency(soup):
     div_mfm_grey_bg = div[1].find(class_='mfm-grey-bg')
     div_mfm_grey_bg_tbody = div_mfm_grey_bg.find('tbody')
 
-    # print(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr'))
-    # print(len(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr')))
+    # log.info(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr'))
+    # log.info(len(div_mfm_grey_bg_tbody.findAll('span', class_='mfm-posr')))
+    # log.info(len(div_mfm_grey_bg_tbody.findAll('tr')))
 
-    get_usd_retail(div_mfm_grey_bg_tbody)
-    get_usd_auction(div_mfm_grey_bg_tbody)
-    get_usd_nbu(div_mfm_grey_bg_tbody)
+    # get_usd_retail(div_mfm_grey_bg_tbody)
+    # get_usd_auction(div_mfm_grey_bg_tbody)
+    # get_usd_nbu(div_mfm_grey_bg_tbody)
+
+    for line in div_mfm_grey_bg_tbody.findAll('tr'):
+        td = line.findAll('td')
+        log.info(td)
+
+        # log.info(td[0].get('data-title'))
+        log.info(td[0].a.text)
+
+        # tds = div_mfm_grey_bg_tbody.findAll('tr')[0].findAll('td')
+        # log.info(tds[0].get('data-title'))
+        # log.info(tds[0].text)
+        # log.info('{}\n'.format('*' * 50))
+        # log.info(tds[1].get('data-title'))
+        # log.info(tds[1].text)
+        # log.info('{}\n'.format('*' * 50))
+        # log.info(tds[2].get('data-title'))
+        # log.info(tds[2].text)
+        # log.info('{}\n'.format('*' * 50))
+        # log.info(tds[3].get('data-title'))
+        # log.info(tds[3].text)
+        # log.info('{}\n'.format('*' * 50))
+        # log.info('{}\n'.format('*' * 50))
+
+
+def get_currency__no_nbu():
+    pass
+
+
+def get_currency__from_nbu():
+    pass
 
 
 if __name__ == '__main__':
