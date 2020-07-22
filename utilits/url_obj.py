@@ -29,7 +29,7 @@ class URL(object):
     def data(self):
         return self.__data
 
-    def response(self, item=None):
+    def status(self, item=None):
         try:
             response = requests.get(self.__url)
         except Exception as err:
@@ -49,7 +49,7 @@ if __name__ == '__main__':
     for url in urls:
         url_obj = URL(url)
         log.debug(url_obj)
-        if url_obj.response():
+        if url_obj.status():
             for i, v in url_obj.data.items():
                 log.debug(i)
                 log.debug(v)

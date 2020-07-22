@@ -1,8 +1,9 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from __future__ import annotations
-from .AbstractCurrency import Currency
+from AbstractCurrency import Currency
 from utilits.log_settings import log
+from utilits.url_obj import URL
 
 
 __author__ = 'PyARK'
@@ -12,20 +13,30 @@ __status__ = "Production"
 
 
 class USD(Currency):
-    self.__currency = 'https://minfin.com.ua/ua/currency/usd/'
-    self.__usd_retail_json = 'https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json'
-    self.__usd_auction_json = 'https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json'
-    self.__usd_nbu_json = 'https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594720251'
-
-    self.__usd_visa = 'https://minfin.com.ua/ua/currency/visa/usd/'
-    self.__usd_mastercard = 'https://minfin.com.ua/ua/currency/mastercard/usd/'
-    self.__usd_visa_json = 'https://minfin.com.ua/ua/data/currency/card/visa.usd.rates.full.json'
-    self.__usd_mastercard_json = 'https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json'
-    self.__usd_cards_rates = 'https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json'
+    Currency = None
+    Retail = None
+    Auction = None
+    NBU = None
+    Visa = None
+    MasterCard = None
 
     def __init__(self):
         super().__init__()
-        log.debug(self.__name__)
+        log.debug(self)
+
+        self.__currency = URL('https://minfin.com.ua/ua/currency/usd/')
+        self.__retail_json = URL('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json')
+        self.__auction_json = URL('https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json')
+        self.__nbu_json = URL('https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594720251')
+
+        self.__visa = URL('https://minfin.com.ua/ua/currency/visa/usd/')
+        self.__mastercard = URL('https://minfin.com.ua/ua/currency/mastercard/usd/')
+        self.__visa_json = URL('https://minfin.com.ua/ua/data/currency/card/visa.usd.rates.full.json')
+        self.__mastercard_json = URL('https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json')
+        self.__cards_rates = URL('https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json')
+
+    def __str__(self):
+        return 'Card for USD'
 
     def get_data(self):
         log.debug(self)
@@ -33,6 +44,14 @@ class USD(Currency):
 
     def __get_usd_retail(self):
         log.debug(self.__currency)
+        if self.__currency.status():
+            for i, v in self.__currency.data.items():
+                log.debug(i)
+                log.debug(v)
+        else:
+            for i, v in self.__currency.errors.items():
+                log.debug(i)
+                log.debug(v)
 
     def __get_usd_auction(self):
         pass

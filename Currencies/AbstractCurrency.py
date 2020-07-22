@@ -13,7 +13,7 @@ __status__ = "Production"
 
 class Currency(ABC):
     def __init__(self):
-        
+        pass
 
     @abstractmethod
     def get_data(self):
