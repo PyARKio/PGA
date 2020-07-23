@@ -5,6 +5,7 @@ from AbstractCurrency import Currency
 from utilits.log_settings import log
 from utilits.url_obj import URL
 from bs4 import BeautifulSoup
+import re
 
 
 __author__ = 'PyARK'
@@ -14,12 +15,12 @@ __status__ = "Production"
 
 
 class USD(Currency):
-    Currency = None
-    Retail = None
-    Auction = None
-    NBU = None
-    Visa = None
-    MasterCard = None
+    Currency = '-/-'
+    Retail = '-/-'
+    Auction = '-/-'
+    NBU = '-/-'
+    Visa = '-/-'
+    MasterCard = '-/-'
 
     def __init__(self):
         super().__init__()
@@ -48,47 +49,65 @@ class USD(Currency):
         log.debug(self.__currency)
         if self.__currency.status():
             content = self.__currency.data['content']
-            log.info(content)
+            # log.info(content)
 
             html = BeautifulSoup(content, 'html.parser')
 
             # [$] Курс долара до гривні на 07.07.2020 в Україні ᐈ Мінфін
-            try:
-                log.info('\n{}'.format(html.title.text))
-            except Exception as err:
-                log.error(err)
+            # try:
+            #     log.info('\n{}'.format(html.title.text))
+            # except Exception as err:
+            #     log.error(err)
 
-            log.info('{}\n'.format('*' * 50))
+            # log.info('{}\n'.format('*' * 50))
             main = html.main
 
-            # get active currency  ДОЛАР
             div = main.findAll(class_='mfz-container')
-            active_mfm_tab_menu = div[1].find(class_='active')
-            log.info(active_mfm_tab_menu.text)
-            log.info('{}\n'.format('*' * 50))
 
             # get active currency value
             div_mfm_grey_bg = div[1].find(class_='mfm-grey-bg')
             div_mfm_grey_bg_tbody = div_mfm_grey_bg.find('tbody')
+            tr = div_mfm_grey_bg_tbody.findAll('tr')
+            log.info(len(tr))
 
-            tds = div_mfm_grey_bg_tbody.findAll('tr')[0].findAll('td')
-            log.info(tds[0].get('data-title'))
-            log.info(tds[0].text)
-            log.info('{}\n'.format('*' * 50))
-            log.info(tds[1].get('data-title'))
-            log.info(tds[1].text)
-            log.info('{}\n'.format('*' * 50))
-            log.info(tds[2].get('data-title'))
-            log.info(tds[2].text)
-            log.info('{}\n'.format('*' * 50))
-            log.info(tds[3].get('data-title'))
-            log.info(tds[3].text)
-            log.info('{}\n'.format('*' * 50))
-            log.info('{}\n'.format('*' * 50))
+            if len(tr) == 2:
+                # Auction
+                tds = tr[0].findAll('td')
+                USD.Auction = {'bid': tds[1].text.replace('\n', ''),
+                               'offer': tds[2].text.replace('\n', ''),
+                               'week': tds[3].text.replace('\n', '')}
+                log.info(USD.Auction)
 
-            for i, v in self.__currency.data.items():
-                log.debug(i)
-                log.debug(v)
+                # NBU
+                tds = tr[1].findAll('td')
+                USD.NBU = {'nbu': tds[1].text.replace('\n', ''),
+                           'week': tds[2].text.replace('\n', '')}
+                log.info(USD.NBU)
+
+            elif len(tr) == 3:
+                # Retail
+                tds = tr[1].findAll('td')
+                USD.Retail = {'bid': tds[1].text.replace('\n', ''),
+                               'offer': tds[2].text.replace('\n', ''),
+                               'week': tds[3].text.replace('\n', '')}
+                log.info(USD.Retail)
+
+                # Auction
+                tds = tr[2].findAll('td')
+                USD.Auction = {'bid': tds[1].text.replace('\n', ''),
+                               'offer': tds[2].text.replace('\n', ''),
+                               'week': tds[3].text.replace('\n', '')}
+                log.info(USD.Auction)
+
+                # NBU
+                tds = tr[3].findAll('td')
+                USD.NBU = {'nbu': tds[1].text.replace('\n', ''),
+                           'week': tds[2].text.replace('\n', '')}
+                log.info(USD.NBU)
+
+            # for i, v in self.__currency.data.items():
+            #     log.debug(i)
+            #     log.debug(v)
         else:
             for i, v in self.__currency.errors.items():
                 log.debug(i)
@@ -111,6 +130,10 @@ class USD(Currency):
 
 
 if __name__ == '__main__':
+    import time
+
     usd = USD()
-    usd.get_data()
+    while True:
+        usd.get_data()
+        time.sleep(1800)
 
