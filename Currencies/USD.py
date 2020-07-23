@@ -4,6 +4,7 @@ from __future__ import annotations
 from AbstractCurrency import Currency
 from utilits.log_settings import log
 from utilits.url_obj import URL
+from bs4 import BeautifulSoup
 
 
 __author__ = 'PyARK'
@@ -35,16 +36,56 @@ class USD(Currency):
         self.__mastercard_json = URL('https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json')
         self.__cards_rates = URL('https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json')
 
-    def __str__(self):
-        return 'Card for USD'
+    @classmethod
+    def __str__(cls):
+        return 'Card for {}'.format(cls.__name__)
 
     def get_data(self):
         log.debug(self)
-        self.__get_usd_retail()
+        self.__get_retail()
 
-    def __get_usd_retail(self):
+    def __get_retail(self):
         log.debug(self.__currency)
         if self.__currency.status():
+            content = self.__currency.data['content']
+            log.info(content)
+
+            html = BeautifulSoup(content, 'html.parser')
+
+            # [$] Курс долара до гривні на 07.07.2020 в Україні ᐈ Мінфін
+            try:
+                log.info('\n{}'.format(html.title.text))
+            except Exception as err:
+                log.error(err)
+
+            log.info('{}\n'.format('*' * 50))
+            main = html.main
+
+            # get active currency  ДОЛАР
+            div = main.findAll(class_='mfz-container')
+            active_mfm_tab_menu = div[1].find(class_='active')
+            log.info(active_mfm_tab_menu.text)
+            log.info('{}\n'.format('*' * 50))
+
+            # get active currency value
+            div_mfm_grey_bg = div[1].find(class_='mfm-grey-bg')
+            div_mfm_grey_bg_tbody = div_mfm_grey_bg.find('tbody')
+
+            tds = div_mfm_grey_bg_tbody.findAll('tr')[0].findAll('td')
+            log.info(tds[0].get('data-title'))
+            log.info(tds[0].text)
+            log.info('{}\n'.format('*' * 50))
+            log.info(tds[1].get('data-title'))
+            log.info(tds[1].text)
+            log.info('{}\n'.format('*' * 50))
+            log.info(tds[2].get('data-title'))
+            log.info(tds[2].text)
+            log.info('{}\n'.format('*' * 50))
+            log.info(tds[3].get('data-title'))
+            log.info(tds[3].text)
+            log.info('{}\n'.format('*' * 50))
+            log.info('{}\n'.format('*' * 50))
+
             for i, v in self.__currency.data.items():
                 log.debug(i)
                 log.debug(v)
@@ -53,19 +94,19 @@ class USD(Currency):
                 log.debug(i)
                 log.debug(v)
 
-    def __get_usd_auction(self):
+    def __get_auction(self):
         pass
 
-    def __get_usd_nbu(self):
+    def __get_nbu(self):
         pass
 
-    def __get_usd_interbank(self):
+    def __ge_usd_interbank(self):
         pass
 
-    def __get_usd_visa(self):
+    def __get_visa(self):
         pass
 
-    def __get_usd_mastercard(self):
+    def __get_mastercard(self):
         pass
 
 
