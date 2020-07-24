@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from __future__ import annotations
-from AbstractCurrency import Currency
+from .AbstractCurrency import Currency
 from utilits.log_settings import log
 from utilits.url_obj import URL
 from bs4 import BeautifulSoup
@@ -28,6 +28,9 @@ class USD(Currency):
         log.debug(self)
 
         self.__currency = URL('https://minfin.com.ua/ua/currency/usd/')
+        self.__banks = URL('https://minfin.com.ua/ua/currency/banks/usd/')
+        self.__auction = URL('https://minfin.com.ua/ua/currency/auction/usd/buy/all/')
+        self.__nbu = URL('https://minfin.com.ua/ua/currency/nbu/usd/')
         self.__retail_json = URL('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json')
         self.__auction_json = URL('https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json')
         self.__nbu_json = URL('https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594720251')
