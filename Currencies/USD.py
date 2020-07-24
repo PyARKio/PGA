@@ -6,6 +6,7 @@ from utilits.log_settings import log
 from utilits.url_obj import URL
 from bs4 import BeautifulSoup
 import re
+from random import randint
 
 
 __author__ = 'PyARK'
@@ -86,21 +87,21 @@ class USD(Currency):
 
             elif len(tr) == 3:
                 # Retail
-                tds = tr[1].findAll('td')
+                tds = tr[0].findAll('td')
                 USD.Retail = {'bid': tds[1].text.replace('\n', ''),
                                'offer': tds[2].text.replace('\n', ''),
                                'week': tds[3].text.replace('\n', '')}
                 log.info(USD.Retail)
 
                 # Auction
-                tds = tr[2].findAll('td')
+                tds = tr[1].findAll('td')
                 USD.Auction = {'bid': tds[1].text.replace('\n', ''),
                                'offer': tds[2].text.replace('\n', ''),
                                'week': tds[3].text.replace('\n', '')}
                 log.info(USD.Auction)
 
                 # NBU
-                tds = tr[3].findAll('td')
+                tds = tr[2].findAll('td')
                 USD.NBU = {'nbu': tds[1].text.replace('\n', ''),
                            'week': tds[2].text.replace('\n', '')}
                 log.info(USD.NBU)
@@ -119,7 +120,7 @@ class USD(Currency):
     def __get_nbu(self):
         pass
 
-    def __ge_usd_interbank(self):
+    def __get_interbank(self):
         pass
 
     def __get_visa(self):
@@ -135,5 +136,8 @@ if __name__ == '__main__':
     usd = USD()
     while True:
         usd.get_data()
-        time.sleep(1800)
+        sleep = randint(265, 1378)
+        log.info(sleep)
+        log.info('\n')
+        time.sleep(sleep)
 
