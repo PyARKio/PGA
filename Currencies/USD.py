@@ -4,6 +4,7 @@ from __future__ import annotations
 from .AbstractCurrency import Currency
 from utilits.log_settings import log
 from utilits.url_obj import URL
+from utilits.interrupt import Interrupt
 from bs4 import BeautifulSoup
 import re
 from random import randint
@@ -40,6 +41,8 @@ class USD(Currency):
         self.__visa_json = URL('https://minfin.com.ua/ua/data/currency/card/visa.usd.rates.full.json')
         self.__mastercard_json = URL('https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json')
         self.__cards_rates = URL('https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json')
+
+        self.__timer = Interrupt(periodic='ra')
 
     @classmethod
     def __str__(cls):
