@@ -58,15 +58,12 @@ class USD(Currency):
     def get_data(self):
         log.debug(self)
         self.__get_banks()
+        self.__get_auction()
+        self.__get_nbu()
         # log.info(self.__timer.delay)
 
     def __get_banks(self):
         if self.__banks.status():
-
-            # log.info(td)
-            # log.info(td.get('data-small'))
-            # log.info(td.get('data-title'))
-
             content = self.__banks.data['content']
             html = BeautifulSoup(content, 'html.parser')
             main = html.main
@@ -88,6 +85,33 @@ class USD(Currency):
             self.__source_one__banks__common['value']['week'] = week[0]
 
             log.info(self.__source_one__banks__common)
+
+    def __get_auction(self):
+        if self.__auction.status():
+            content = self.__auction.data['content']
+            html = BeautifulSoup(content, 'html.parser')
+            main = html.main
+            div = main.find(class_='container clearfix')
+            tbody = div.tbody
+            log.info(tbody)
+
+    def __get_nbu(self):
+        if self.__nbu.status():
+            content = self.__nbu.data['content']
+            html = BeautifulSoup(content, 'html.parser')
+            main = html.main
+            div = main.find(class_='container clearfix')
+            tbody = div.tbody
+            log.info(tbody)
+
+    def __get_interbank(self):
+        pass
+
+    def __get_visa(self):
+        pass
+
+    def __get_mastercard(self):
+        pass
 
     def __get_retail(self):
         log.debug(self.__currency)
@@ -156,21 +180,6 @@ class USD(Currency):
             for i, v in self.__currency.errors.items():
                 log.debug(i)
                 log.debug(v)
-
-    def __get_auction(self):
-        pass
-
-    def __get_nbu(self):
-        pass
-
-    def __get_interbank(self):
-        pass
-
-    def __get_visa(self):
-        pass
-
-    def __get_mastercard(self):
-        pass
 
 
 if __name__ == '__main__':
