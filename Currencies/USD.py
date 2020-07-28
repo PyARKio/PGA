@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from __future__ import annotations
-from .AbstractCurrency import Currency
+from AbstractCurrency import Currency
 from utilits.log_settings import log
 from utilits.url_obj import URL
 from utilits.interrupt import Interrupt
@@ -42,7 +42,9 @@ class USD(Currency):
         self.__mastercard_json = URL('https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json')
         self.__cards_rates = URL('https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json')
 
-        self.__timer = Interrupt(periodic='ra')
+        # self.__timer = Interrupt(name=self, callback_handler=self.get_data, delay=(30, 67), random_mode=True)
+        # self.__timer.go_go()
+        # log.info(self.__timer.delay)
 
     @classmethod
     def __str__(cls):
@@ -50,7 +52,22 @@ class USD(Currency):
 
     def get_data(self):
         log.debug(self)
-        self.__get_retail()
+        self.__get_banks()
+        # log.info(self.__timer.delay)
+
+    def __get_banks(self):
+        if self.__banks.status():
+            content = self.__banks.data['content']
+            html = BeautifulSoup(content, 'html.parser')
+            main = html.main
+            div = main.find(class_='container clearfix')
+            tbody = div.tbody
+            td = tbody.find(class_='mfm-text-nowrap')
+            log.info(td)
+            log.info(td.get('data-small'))
+            log.info(td.get('data-title'))
+            log.info(td.text.replace('\n', ' '))
+
 
     def __get_retail(self):
         log.debug(self.__currency)
@@ -140,10 +157,8 @@ if __name__ == '__main__':
     import time
 
     usd = USD()
-    while True:
-        usd.get_data()
-        sleep = randint(265, 1378)
-        log.info(sleep)
-        log.info('\n')
-        time.sleep(sleep)
+    usd.get_data()
+    # while True:
+    #     sleep = 1000
+    #     time.sleep(sleep)
 

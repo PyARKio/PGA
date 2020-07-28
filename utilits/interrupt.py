@@ -19,7 +19,6 @@ def func(data):
 class Interrupt(threading.Thread):
     def __init__(self, callback_handler, delay, random_mode=False, name='default_timer'):
         threading.Thread.__init__(self)
-        log.info(isinstance(delay, tuple))
         if random_mode and isinstance(delay, tuple):
             self.__delay = randint(delay[0], delay[1])
         elif random_mode and not isinstance(delay, tuple):
@@ -38,6 +37,8 @@ class Interrupt(threading.Thread):
         self.__pause = False
         self.__delay_borders = delay
         self.__random = random_mode
+
+        # self.units = {'callback': self.__handler}
 
     def __get_delay(self):
         return randint(self.__delay_borders[0], self.__delay_borders[1]) if self.__random else self.__delay
@@ -68,7 +69,7 @@ class Interrupt(threading.Thread):
         while self.__running:
             time.sleep(self.__delay)
             if not self.__pause:
-                self.__handler('etr')
+                self.__handler()
             self.__delay = self.__get_delay()
         log.info('TIMER STOP !!!')
 
@@ -91,6 +92,21 @@ class Interrupt(threading.Thread):
     @property
     def delay_borders(self):
         return self.__delay_borders
+
+    def random_mode_enable(self):
+        self.__random = True
+
+    def random_mode_disable(self):
+        self.__random = False
+
+    def set_callback(self, callback):
+        self.__handler = callback
+
+    def set_delay(self, delay):
+        self.__delay = delay
+
+    def set_delay_borders(self, borders):
+        self.__delay_borders = borders
 
 
 if __name__ == '__main__':
