@@ -47,10 +47,9 @@ class USD(Currency):
         # self.__timer.go_go()
         # log.info(self.__timer.delay)
 
-        # {'time': None, 'value': {'bid': {'main': None, 'diff': None},
-        #                          'offer': {'main': None, 'diff': None},
-        #                          'week': None}}
-        self.__source_one__banks__common = {}
+        self.__source_one__banks__common = {'time': None, 'value': {'bid': {'main': None, 'diff': None},
+                                                                    'offer': {'main': None, 'diff': None},
+                                                                    'week': None}}
 
     @classmethod
     def __str__(cls):
@@ -63,26 +62,32 @@ class USD(Currency):
 
     def __get_banks(self):
         if self.__banks.status():
+
+            # log.info(td)
+            # log.info(td.get('data-small'))
+            # log.info(td.get('data-title'))
+
             content = self.__banks.data['content']
             html = BeautifulSoup(content, 'html.parser')
             main = html.main
             div = main.find(class_='container clearfix')
             tbody = div.tbody
-            td = tbody.find(class_='mfm-text-nowrap')
-            log.info(td)
-            log.info(td.get('data-small'))
-            log.info(td.get('data-title'))
 
-            find_td = re.findall(r'\S\d{1,2}\.\d{1,3}', td.text)
-            log.info(find_td)
+            td_bid_offer = tbody.find(class_='mfm-text-nowrap')
+            bid_offer = re.findall(r'\S\d{1,2}\.\d{1,3}', td_bid_offer.text)
+            td_week = tbody.find(class_='mfcur-sparkline-indicator icon-down-open')
+            week = re.findall(r'\S\d{1,2}\.\d{1,3}', td_week.text)
 
             # https://tproger.ru/translations/regular-expression-python/
 
-            # self.__source_one__banks__common['time'] = datetime.now()
-            # self.__source_one__banks__common['value']['bid']['main'] =
-            # self.__source_one__banks__common['value']['bid']['diff'] =
+            self.__source_one__banks__common['time'] = datetime.now()
+            self.__source_one__banks__common['value']['bid']['main'] = bid_offer[0]
+            self.__source_one__banks__common['value']['bid']['diff'] = bid_offer[1]
+            self.__source_one__banks__common['value']['offer']['main'] = bid_offer[3]
+            self.__source_one__banks__common['value']['offer']['diff'] = bid_offer[2]
+            self.__source_one__banks__common['value']['week'] = week[0]
 
-
+            log.info(self.__source_one__banks__common)
 
     def __get_retail(self):
         log.debug(self.__currency)
