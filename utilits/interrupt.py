@@ -16,6 +16,7 @@ def func(data):
     print(data)
 
 
+# add time of day
 class Interrupt(threading.Thread):
     def __init__(self, callback_handler, delay, random_mode=False, name='default_timer'):
         threading.Thread.__init__(self)

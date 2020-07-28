@@ -8,6 +8,7 @@ from utilits.interrupt import Interrupt
 from bs4 import BeautifulSoup
 import re
 from random import randint
+from datetime import datetime
 
 
 __author__ = 'PyARK'
@@ -46,6 +47,11 @@ class USD(Currency):
         # self.__timer.go_go()
         # log.info(self.__timer.delay)
 
+        # {'time': None, 'value': {'bid': {'main': None, 'diff': None},
+        #                          'offer': {'main': None, 'diff': None},
+        #                          'week': None}}
+        self.__source_one__banks__common = {}
+
     @classmethod
     def __str__(cls):
         return 'Card for {}'.format(cls.__name__)
@@ -66,7 +72,16 @@ class USD(Currency):
             log.info(td)
             log.info(td.get('data-small'))
             log.info(td.get('data-title'))
-            log.info(td.text.replace('\n', ' '))
+
+            find_td = re.findall(r'\S\d{1,2}\.\d{1,3}', td.text)
+            log.info(find_td)
+
+            # https://tproger.ru/translations/regular-expression-python/
+
+            # self.__source_one__banks__common['time'] = datetime.now()
+            # self.__source_one__banks__common['value']['bid']['main'] =
+            # self.__source_one__banks__common['value']['bid']['diff'] =
+
 
 
     def __get_retail(self):
