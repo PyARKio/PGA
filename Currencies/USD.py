@@ -66,6 +66,7 @@ class USD(Currency):
         self.__get_banks()
         self.__get_auction()
         self.__get_nbu()
+        self.__get_interbank()
 
     # WARNING    \S\d{1,2}\.\d{1,3} ['27.550', '0.050', '0.000', '27.800']
     def __get_banks(self):
@@ -157,7 +158,27 @@ class USD(Currency):
                 log.debug(v)
 
     def __get_interbank(self):
-        pass
+        if self.__interbank.status():
+            content = self.__interbank.data['content']
+            html = BeautifulSoup(content, 'html.parser')
+            main = html.main
+            div = main.find(class_='container clearfix')
+            tbody = div.tbody
+            trs = tbody.findAll('tr')
+
+            bid = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[0].find(class_='active').text)
+            offer = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[1].find(class_='active').text)
+
+            log.info(bid)
+            log.info(offer)
+
+            # for i, v in self.__nbu.data.items():
+            #         log.debug(i)
+            #         log.debug(v)
+        else:
+            for i, v in self.__nbu.errors.items():
+                log.debug(i)
+                log.debug(v)
 
     def __get_visa(self):
         pass
