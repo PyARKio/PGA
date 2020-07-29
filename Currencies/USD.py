@@ -37,6 +37,8 @@ class USD(Currency):
         self.__auction_json = URL('https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json')
         self.__nbu_json = URL('https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594720251')
 
+        self.__interbank = URL('https://minfin.com.ua/ua/currency/mb/')
+
         self.__visa = URL('https://minfin.com.ua/ua/currency/visa/usd/')
         self.__mastercard = URL('https://minfin.com.ua/ua/currency/mastercard/usd/')
         self.__visa_json = URL('https://minfin.com.ua/ua/data/currency/card/visa.usd.rates.full.json')
@@ -50,6 +52,10 @@ class USD(Currency):
         self.__source_one__banks__common = {'time': None, 'value': {'bid': {'main': None, 'diff': None},
                                                                     'offer': {'main': None, 'diff': None},
                                                                     'week': None}}
+        self.__source_one__auction__common = {'time': None, 'value': {'bid': {'main': None, 'diff': None},
+                                                                      'offer': {'main': None, 'diff': None}}}
+        self.__source_one__nbu__common = {'time': None, 'value': {'nbu': {'main': None, 'diff': None},
+                                                                  'week': None, 'date': None}}
 
     @classmethod
     def __str__(cls):
@@ -60,8 +66,8 @@ class USD(Currency):
         self.__get_banks()
         self.__get_auction()
         self.__get_nbu()
-        # log.info(self.__timer.delay)
 
+    # WARNING    \S\d{1,2}\.\d{1,3} ['27.550', '0.050', '0.000', '27.800']
     def __get_banks(self):
         if self.__banks.status():
             content = self.__banks.data['content']
@@ -71,7 +77,7 @@ class USD(Currency):
             tbody = div.tbody
 
             td_bid_offer = tbody.find(class_='mfm-text-nowrap')
-            bid_offer = re.findall(r'\S\d{1,2}\.\d{1,3}', td_bid_offer.text)
+            bid_offer = re.findall(r'\d{1,2}\.\d{1,3}', td_bid_offer.text)
             td_week = tbody.find(class_='mfcur-sparkline-indicator icon-down-open')
             week = re.findall(r'\S\d{1,2}\.\d{1,3}', td_week.text)
 
@@ -86,15 +92,41 @@ class USD(Currency):
 
             log.info(self.__source_one__banks__common)
 
-    def __get_auction(self):
-        if self.__auction.status():
-            content = self.__auction.data['content']
-            html = BeautifulSoup(content, 'html.parser')
-            main = html.main
-            div = main.find(class_='container clearfix')
-            tbody = div.tbody
-            log.info(tbody)
+            # for i, v in self.__banks.data.items():
+            #         log.debug(i)
+            #         log.debug(v)
+        else:
+            for i, v in self.__banks.errors.items():
+                log.debug(i)
+                log.debug(v)
 
+    # WARNING    \S\d{1,2}\.\d{1,3} ['27.550', '0.050', '0.000', '27.800']
+    def __get_auction(self):
+        if self.__currency.status():
+            content = self.__currency.data['content']
+            html = BeautifulSoup(content, 'html.parser')
+            trs = html.main.tbody.findAll('tr')
+
+            for tr in trs:
+                if 'ЧОРНИЙ РИНОК' in tr.a:
+                    bid_offer = re.findall(r'\d{1,2}\.\d{1,3}', tr.text)
+                    self.__source_one__auction__common['time'] = datetime.now()
+                    self.__source_one__auction__common['value']['bid']['main'] = bid_offer[0]
+                    self.__source_one__auction__common['value']['bid']['diff'] = bid_offer[1]
+                    self.__source_one__auction__common['value']['offer']['main'] = bid_offer[2]
+                    self.__source_one__auction__common['value']['offer']['diff'] = bid_offer[3]
+
+            log.info(self.__source_one__auction__common)
+
+            # for i, v in self.__currency.data.items():
+            #         log.debug(i)
+            #         log.debug(v)
+        else:
+            for i, v in self.__currency.errors.items():
+                log.debug(i)
+                log.debug(v)
+
+    # WARNING    \S\d{1,2}\.\d{1,3} ['27.550', '0.050', '0.000', '27.800']
     def __get_nbu(self):
         if self.__nbu.status():
             content = self.__nbu.data['content']
@@ -102,7 +134,27 @@ class USD(Currency):
             main = html.main
             div = main.find(class_='container clearfix')
             tbody = div.tbody
-            log.info(tbody)
+
+            nbu_c = tbody.find(class_='responsive-hide td-collapsed mfm-text-nowrap mfm-text-right')
+            bid_offer = re.findall(r'\S\d{1,2}\.\d{1,4}', nbu_c.text)
+
+            nbu_week = tbody.find(class_='mfcur-sparkline-indicator icon-up-open')
+
+            self.__source_one__nbu__common['time'] = datetime.now()
+            self.__source_one__nbu__common['value']['nbu']['main'] = bid_offer[0]
+            self.__source_one__nbu__common['value']['nbu']['diff'] = bid_offer[1]
+            self.__source_one__nbu__common['value']['week'] = nbu_week.text
+            self.__source_one__nbu__common['value']['date'] = tbody.small.text
+
+            log.info(self.__source_one__nbu__common)
+
+            # for i, v in self.__nbu.data.items():
+            #         log.debug(i)
+            #         log.debug(v)
+        else:
+            for i, v in self.__nbu.errors.items():
+                log.debug(i)
+                log.debug(v)
 
     def __get_interbank(self):
         pass
@@ -113,23 +165,12 @@ class USD(Currency):
     def __get_mastercard(self):
         pass
 
-    def __get_retail(self):
+    def __artifact(self):
         log.debug(self.__currency)
         if self.__currency.status():
             content = self.__currency.data['content']
-            # log.info(content)
-
             html = BeautifulSoup(content, 'html.parser')
-
-            # [$] Курс долара до гривні на 07.07.2020 в Україні ᐈ Мінфін
-            # try:
-            #     log.info('\n{}'.format(html.title.text))
-            # except Exception as err:
-            #     log.error(err)
-
-            # log.info('{}\n'.format('*' * 50))
             main = html.main
-
             div = main.findAll(class_='mfz-container')
 
             # get active currency value
