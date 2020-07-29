@@ -172,6 +172,7 @@ class USD(Currency):
             log.info(bid)
             log.info(offer)
 
+
             # for i, v in self.__nbu.data.items():
             #         log.debug(i)
             #         log.debug(v)
