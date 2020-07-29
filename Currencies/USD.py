@@ -54,8 +54,10 @@ class USD(Currency):
                                                                     'week': None}}
         self.__source_one__auction__common = {'time': None, 'value': {'bid': {'main': None, 'diff': None},
                                                                       'offer': {'main': None, 'diff': None}}}
-        self.__source_one__nbu__common = {'time': None, 'value': {'nbu': {'main': None, 'diff': None},
+        self.__source_one__nbu__common = {'time': None, 'value': {'official': {'main': None, 'diff': None},
                                                                   'week': None, 'date': None}}
+        self.__source_one__ib__common = {'time': None, 'value': {'bid': {'main': None, 'diff': None},
+                                                                 'offer': {'main': None, 'diff': None}}}
 
     @classmethod
     def __str__(cls):
@@ -137,13 +139,13 @@ class USD(Currency):
             tbody = div.tbody
 
             nbu_c = tbody.find(class_='responsive-hide td-collapsed mfm-text-nowrap mfm-text-right')
-            bid_offer = re.findall(r'\S\d{1,2}\.\d{1,4}', nbu_c.text)
+            bid_offer = re.findall(r'\d{1,2}\.\d{1,4}', nbu_c.text)
 
             nbu_week = tbody.find(class_='mfcur-sparkline-indicator icon-up-open')
 
             self.__source_one__nbu__common['time'] = datetime.now()
-            self.__source_one__nbu__common['value']['nbu']['main'] = bid_offer[0]
-            self.__source_one__nbu__common['value']['nbu']['diff'] = bid_offer[1]
+            self.__source_one__nbu__common['value']['official']['main'] = bid_offer[0]
+            self.__source_one__nbu__common['value']['official']['diff'] = bid_offer[1]
             self.__source_one__nbu__common['value']['week'] = nbu_week.text
             self.__source_one__nbu__common['value']['date'] = tbody.small.text
 
@@ -169,9 +171,13 @@ class USD(Currency):
             bid = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[0].find(class_='active').text)
             offer = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[1].find(class_='active').text)
 
-            log.info(bid)
-            log.info(offer)
+            self.__source_one__ib__common['time'] = datetime.now()
+            self.__source_one__ib__common['value']['bid']['main'] = bid[0]
+            self.__source_one__ib__common['value']['bid']['diff'] = bid[1]
+            self.__source_one__ib__common['value']['offer']['main'] = offer[0]
+            self.__source_one__ib__common['value']['offer']['diff'] = offer[1]
 
+            log.info(self.__source_one__ib__common)
 
             # for i, v in self.__nbu.data.items():
             #         log.debug(i)
@@ -182,7 +188,32 @@ class USD(Currency):
                 log.debug(v)
 
     def __get_visa(self):
-        pass
+        if self.__visa.status():
+            content = self.__visa.data['content']
+            html = BeautifulSoup(content, 'html.parser')
+            main = html.main
+            div = main.find(class_='container clearfix')
+            tbody = div.tbody
+            trs = tbody.findAll('tr')
+
+            bid = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[0].find(class_='active').text)
+            offer = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[1].find(class_='active').text)
+
+            self.__source_one__ib__common['time'] = datetime.now()
+            self.__source_one__ib__common['value']['bid']['main'] = bid[0]
+            self.__source_one__ib__common['value']['bid']['diff'] = bid[1]
+            self.__source_one__ib__common['value']['offer']['main'] = offer[0]
+            self.__source_one__ib__common['value']['offer']['diff'] = offer[1]
+
+            log.info(self.__source_one__ib__common)
+
+            # for i, v in self.__nbu.data.items():
+            #         log.debug(i)
+            #         log.debug(v)
+        else:
+            for i, v in self.__nbu.errors.items():
+                log.debug(i)
+                log.debug(v)
 
     def __get_mastercard(self):
         pass
