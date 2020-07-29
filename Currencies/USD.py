@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from __future__ import annotations
-from AbstractCurrency import Currency
+from BasisForCurrencies.AbstractCurrency import Currency
 from utilits.log_settings import log
 from utilits.url_obj import URL
 from utilits.interrupt import Interrupt
@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import re
 from random import randint
 from datetime import datetime
+from Currencies.USD_Utilits.Bank import Bank
 
 
 __author__ = 'PyARK'
@@ -59,13 +60,16 @@ class USD(Currency):
         self.__source_one__ib__common = {'time': None, 'value': {'bid': {'main': None, 'diff': None},
                                                                  'offer': {'main': None, 'diff': None}}}
 
+        self.__bank = Bank('https://minfin.com.ua/ua/currency/banks/usd/')
+
     @classmethod
     def __str__(cls):
         return 'Card for {}'.format(cls.__name__)
 
     def get_data(self):
         log.debug(self)
-        self.__get_banks()
+        # self.__get_banks()
+        log.info(self.__bank.get)
         self.__get_auction()
         self.__get_nbu()
         self.__get_interbank()
