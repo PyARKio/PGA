@@ -20,4 +20,14 @@ class Currency(ABC):
         log.debug(self)
 
 
+class MainDiff(object):
+    def __init__(self, name):
+        self.__name = name
+        self.main = None
+        self.diff = None
+
+    def __str__(self):
+        return '{}.Main: {}; {}.Diff: {}'.format(self.__name, self.main, self.__name, self.diff)
+
+
 
