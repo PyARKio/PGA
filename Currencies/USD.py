@@ -41,9 +41,9 @@ class USD(Currency):
         self.__mastercard_json = URL('https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json')
         self.__cards_rates = URL('https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json')
 
-        # self.__timer = Interrupt(name=self, callback_handler=self.get_data, delay=(30, 67), random_mode=True)
-        # self.__timer.go_go()
-        # log.info(self.__timer.delay)
+        self.__timer = Interrupt(name=self, callback_handler=self.get_data, delay=(670, 1237), random_mode=True)
+        self.__timer.go_go()
+        log.info(self.__timer.delay)
 
         # WARNING    \S\d{1,2}\.\d{1,3} ['27.550', '0.050', '0.000', '27.800']
         self.__bank = Bank('https://minfin.com.ua/ua/currency/banks/usd/')
@@ -140,7 +140,7 @@ if __name__ == '__main__':
 
     usd = USD()
     usd.get_data()
-    # while True:
-    #     sleep = 1000
-    #     time.sleep(sleep)
+    while True:
+        sleep = 1000
+        time.sleep(sleep)
 
