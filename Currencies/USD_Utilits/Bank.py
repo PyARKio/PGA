@@ -38,7 +38,7 @@ class Bank(object):
 
             # https://tproger.ru/translations/regular-expression-python/
 
-            self.__structure.time = str(datetime.now())
+            self.__structure.time = datetime.now()
             self.__structure.bid.main = bid_offer[0]
             self.__structure.bid.diff = bid_offer[1]
             self.__structure.offer.main = bid_offer[3]
