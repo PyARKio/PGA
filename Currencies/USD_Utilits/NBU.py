@@ -34,7 +34,7 @@ class NBU(object):
             nbu_c = tbody.find(class_='responsive-hide td-collapsed mfm-text-nowrap mfm-text-right')
             bid_offer = re.findall(r'\d{1,2}\.\d{1,4}', nbu_c.text)
 
-            nbu_week = tbody.find(class_='mfcur-sparkline-indicator icon-down-open')
+            nbu_week = tbody.find(class_='mfcur-sparkline-indicator')
 
             self.__structure.time = datetime.now()
             self.__structure.official.main = bid_offer[0]

@@ -33,8 +33,8 @@ class Bank(object):
 
             td_bid_offer = tbody.find(class_='mfm-text-nowrap')
             bid_offer = re.findall(r'\d{1,2}\.\d{1,3}', td_bid_offer.text)
-            td_week = tbody.find(class_='mfcur-sparkline-indicator icon-down-open')
-            week = re.findall(r'\S\d{1,2}\.\d{1,3}', td_week.text)
+            td_week = tbody.find(class_='mfcur-sparkline-indicator')
+            week = re.findall(r'\d{1,2}\.\d{1,3}', td_week.text)
 
             # https://tproger.ru/translations/regular-expression-python/
 
