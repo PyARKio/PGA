@@ -31,7 +31,7 @@ class Auction(object):
 
             for tr in trs:
                 if 'ЧОРНИЙ РИНОК' in tr.a:
-                    bid_offer = re.findall(r'\d{1,2}\.\d{1,3}', tr.text)
+                    bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
                     self.__structure.time = datetime.now()
                     self.__structure.bid.main = bid_offer[0]
                     self.__structure.bid.diff = bid_offer[1]

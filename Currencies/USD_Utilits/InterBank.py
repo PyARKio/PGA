@@ -32,8 +32,8 @@ class InterBank(object):
             tbody = div.tbody
             trs = tbody.findAll('tr')
 
-            bid = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[0].find(class_='active').text)
-            offer = re.findall(r'\S\d{1,2}\.\d{1,4}', trs[1].find(class_='active').text)
+            bid = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', trs[0].find(class_='active').text)
+            offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', trs[1].find(class_='active').text)
 
             self.__structure.time = datetime.now()
             self.__structure.bid.main = bid[0]

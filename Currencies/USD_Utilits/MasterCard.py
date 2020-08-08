@@ -32,7 +32,7 @@ class MasterCard(object):
             tr = div.tbody.tr
             tds = tr.findAll('td')
 
-            bid_offer = re.findall(r'\d{1,2}\.\d{1,4}', tds[3].text)
+            bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[3].text)
 
             self.__structure.time = datetime.now()
             self.__structure.bid.main = bid_offer[0]

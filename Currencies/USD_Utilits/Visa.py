@@ -32,7 +32,7 @@ class Visa(object):
             tr = div.tbody.tr
             tds = tr.findAll('td')
 
-            bid_offer = re.findall(r'\d{1,2}\.\d{1,4}', tds[2].text)
+            bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[2].text)
 
             self.__structure.time = datetime.now()
             self.__structure.bid.main = bid_offer[0]
