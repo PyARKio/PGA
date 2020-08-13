@@ -37,6 +37,8 @@ class Bank(object):
             week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
 
             # https://tproger.ru/translations/regular-expression-python/
+            # https://blogchain.com.ua/regyliarni-virazi-python-vid-prostogo-do-skladnogo-podrobici-prikladi-ilustracii-vpravi/
+            # https://pythonguide.rozh2sch.org.ua/
 
             self.__structure.time = datetime.now()
             self.__structure.bid.main = bid_offer[0]
