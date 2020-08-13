@@ -3,10 +3,7 @@ from __future__ import unicode_literals
 from __future__ import annotations
 from BasisForCurrencies.AbstractCurrency import Currency
 from utilits.log_settings import log
-from utilits.url_obj import URL
-from bs4 import BeautifulSoup
 from utilits.interrupt import Interrupt
-from random import randint
 from Currencies.EUR_Utilits.Bank import Bank
 from Currencies.EUR_Utilits.Auction import Auction
 from Currencies.EUR_Utilits.NBU import NBU
