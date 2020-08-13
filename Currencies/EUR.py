@@ -32,15 +32,6 @@ class EUR(Currency):
     def __init__(self):
         super().__init__()
         log.debug(self)
-
-        self.__retail_json = URL('https://minfin.com.ua/ua/data/currency/retail/usd.rates.full.json')
-        self.__auction_json = URL('https://minfin.com.ua/ua/data/currency/auction/usd.1000.median.daily.format.json')
-        self.__nbu_json = URL('https://minfin.com.ua/data/currency/nbu/nbu.usd.stock.json?1594720251')
-
-        self.__visa_json = URL('https://minfin.com.ua/ua/data/currency/card/visa.usd.rates.full.json')
-        self.__mastercard_json = URL('https://minfin.com.ua/ua/data/currency/card/mc.usd.rates.full.json')
-        self.__cards_rates = URL('https://minfin.com.ua/ua/data/currency/card/usd.rates.full.json')
-
         self.__timer = Interrupt(name=self, callback_handler=self.get_data, delay=(670, 1237), random_mode=True)
         self.__timer.go_go()
         log.info(self.__timer.delay)
@@ -49,7 +40,7 @@ class EUR(Currency):
         self.__bank = Bank('https://minfin.com.ua/ua/currency/banks/eur/')
         self.__auction = Auction('https://minfin.com.ua/ua/currency/eur/')
         self.__nbu = NBU('https://minfin.com.ua/ua/currency/nbu/eur/')
-        self.__interbank = InterBank('https://minfin.com.ua/ua/currency/mb/')
+        self.__interbank = InterBank('https://minfin.com.ua/ua/currency/mb/eur/')
         self.__visa = Visa('https://minfin.com.ua/ua/currency/visa/eur/')
         self.__mastercard = MasterCard('https://minfin.com.ua/ua/currency/mastercard/eur/')
 
@@ -81,7 +72,7 @@ class EUR(Currency):
 if __name__ == '__main__':
     import time
 
-    usd = USD()
+    usd = EUR()
     usd.get_data()
     while True:
         sleep = 1000

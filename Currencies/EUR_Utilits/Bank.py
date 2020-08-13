@@ -36,8 +36,6 @@ class Bank(object):
             td_week = tbody.find(class_='mfcur-sparkline-indicator')
             week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
 
-            # https://tproger.ru/translations/regular-expression-python/
-
             self.__structure.time = datetime.now()
             self.__structure.bid.main = bid_offer[0]
             self.__structure.bid.diff = bid_offer[1]
