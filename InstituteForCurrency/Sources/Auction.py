@@ -17,8 +17,9 @@ __status__ = "Production"
 
 
 class Auction(AbstractSource):
-    def __init__(self, source):
+    def __init__(self, source, chrono):
         super().__init__()
+        self.__chronometer = chrono
         self.__auction_usd = URL(source['USD'])
         self.__auction_eur = URL(source['EUR'])
 
@@ -30,6 +31,8 @@ class Auction(AbstractSource):
 
         self.__delay = randint(self._delay_from, self._delay_to)
         self._get_currency = [self.__get_usd, self.__get_eur]
+
+        self._add_mark()
 
     def __get_usd(self):
         if self.__auction_usd.status():
@@ -79,13 +82,8 @@ class Auction(AbstractSource):
                 log.debug(i)
                 log.debug(v)
 
+    def _add_mark(self):
+        self.__chronometer.add_marks(whom=self, mark={'Position': self._set_delay(), 'CallBack': self.check})
 
-if __name__ == '__main__':
-    nbu = Auction({'USD': 'https://minfin.com.ua/ua/currency/usd/',
-                   'EUR': 'https://minfin.com.ua/ua/currency/eur/'})
-    nbu.check()
-    log.info(nbu.appeal(['USD']))
-    log.info(nbu.appeal(['EUR']))
-    log.info(nbu.appeal(['USD', 'EUR']))
-    log.info(nbu.appeal(['USD1']))
+
 

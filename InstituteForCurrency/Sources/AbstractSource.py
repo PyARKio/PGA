@@ -14,21 +14,23 @@ __status__ = "Production"
 
 class AbstractSource(ABC):
     def __init__(self):
-        self._delay_from = 5
-        self._delay_to = 30
-        self._delay = self._set_delay()
-        log.info(self._delay)
+        self._delay_from = 1
+        self._delay_to = 59
+        self._delay = 0
 
         self._report = {}
         self._get_currency = []
 
     def _set_delay(self):
-        self._delay = randint(self._delay_from, self._delay_to)
+        self._delay += randint(self._delay_from, self._delay_to)
+        if self._delay > 59:
+            self._delay -= 60
         return self._delay
 
     def check(self):
         for currency in self._get_currency:
             currency()
+        self._add_mark()
 
     def appeal(self, letter):
         response = {}
@@ -36,6 +38,10 @@ class AbstractSource(ABC):
             if key in self._report.keys():
                 response[key] = self._report[key]
         return response
+
+    @abstractmethod
+    def _add_mark(self):
+        pass
 
 
 class MainDiff(object):

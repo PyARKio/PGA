@@ -16,8 +16,9 @@ __status__ = "Production"
 
 
 class Bank(AbstractSource):
-    def __init__(self, source):
+    def __init__(self, source, chrono):
         super().__init__()
+        self.__chronometer = chrono
         self.__bank_usd = URL(source['USD'])
         self.__bank_eur = URL(source['EUR'])
 
@@ -28,6 +29,8 @@ class Bank(AbstractSource):
                         'EUR': self.__eur}
 
         self._get_currency = [self.__get_usd, self.__get_eur]
+
+        self._add_mark()
 
     @staticmethod
     def __parser(content):
@@ -83,13 +86,8 @@ class Bank(AbstractSource):
                 log.debug(i)
                 log.debug(v)
 
+    def _add_mark(self):
+        self.__chronometer.add_marks(whom=self, mark={'Position': self._set_delay(), 'CallBack': self.check})
 
-if __name__ == '__main__':
-    nbu = Bank({'USD': 'https://minfin.com.ua/ua/currency/banks/usd/',
-                'EUR': 'https://minfin.com.ua/ua/currency/banks/eur/'})
-    nbu.check()
-    log.info(nbu.appeal(['USD']))
-    log.info(nbu.appeal(['EUR']))
-    log.info(nbu.appeal(['USD', 'EUR']))
-    log.info(nbu.appeal(['USD1']))
+
 

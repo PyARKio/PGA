@@ -9,6 +9,8 @@ from datetime import datetime
 from random import randint
 import re
 
+import time
+
 
 __author__ = 'PyARK'
 __version__ = "1.0.1"
@@ -17,8 +19,9 @@ __status__ = "Production"
 
 
 class Visa(AbstractSource):
-    def __init__(self, source):
+    def __init__(self, source, chrono):
         super().__init__()
+        self.__chronometer = chrono
         self.__visa_usd = URL(source['USD'])
         self.__visa_eur = URL(source['EUR'])
 
@@ -30,6 +33,8 @@ class Visa(AbstractSource):
 
         self.__delay = randint(self._delay_from, self._delay_to)
         self._get_currency = [self.__get_usd, self.__get_eur]
+
+        self._add_mark()
 
     @staticmethod
     def __parser(content):
@@ -80,13 +85,8 @@ class Visa(AbstractSource):
                 log.debug(i)
                 log.debug(v)
 
+    def _add_mark(self):
+        self.__chronometer.add_marks(whom=self, mark={'Position': self._set_delay(), 'CallBack': self.check})
 
-if __name__ == '__main__':
-    nbu = Visa({'USD': 'https://minfin.com.ua/ua/currency/visa/usd/',
-                'EUR': 'https://minfin.com.ua/ua/currency/visa/eur/'})
-    nbu.check()
-    log.info(nbu.appeal(['USD']))
-    log.info(nbu.appeal(['EUR']))
-    log.info(nbu.appeal(['USD', 'EUR']))
-    log.info(nbu.appeal(['USD1']))
+
 

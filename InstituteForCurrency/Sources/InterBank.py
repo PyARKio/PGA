@@ -17,8 +17,9 @@ __status__ = "Production"
 
 
 class InterBank(AbstractSource):
-    def __init__(self, source):
+    def __init__(self, source, chrono):
         super().__init__()
+        self.__chronometer = chrono
         self.__ib_usd = URL(source['USD'])
         self.__ib_eur = URL(source['EUR'])
 
@@ -30,6 +31,8 @@ class InterBank(AbstractSource):
 
         self.__delay = randint(self._delay_from, self._delay_to)
         self._get_currency = [self.__get_usd, self.__get_eur]
+
+        self._add_mark()
 
     @staticmethod
     def __parser(content):
@@ -81,15 +84,10 @@ class InterBank(AbstractSource):
                 log.debug(i)
                 log.debug(v)
 
+    def _add_mark(self):
+        self.__chronometer.add_marks(whom=self, mark={'Position': self._set_delay(), 'CallBack': self.check})
 
-if __name__ == '__main__':
-    nbu = InterBank({'USD': 'https://minfin.com.ua/ua/currency/mb/',
-                     'EUR': 'https://minfin.com.ua/ua/currency/mb/eur/'})
-    nbu.check()
-    log.info(nbu.appeal(['USD']))
-    log.info(nbu.appeal(['EUR']))
-    log.info(nbu.appeal(['USD', 'EUR']))
-    log.info(nbu.appeal(['USD1']))
+
 
 
 
