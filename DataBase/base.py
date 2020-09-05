@@ -1,8 +1,9 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from utilits.log_settings import log
-# from OutputPoints import TelegramBot
-# import configs
+from Arsenal.log_settings import log
+import pymongo
+import bson
+import abc
 
 
 __author__ = 'PyARK'
@@ -11,7 +12,9 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-if __name__ == '__main__':
-    # TelegramBot.telegram_bot__run()
-    pass
+class AbstractMongoDB(abc.ABCMeta):
+    ...
+
+
+
 

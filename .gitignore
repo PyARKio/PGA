@@ -1,5 +1,5 @@
 .idea
 *.pyc
 MinFin/__pycache__
-utilits/__pycache__
+Arsenal/__pycache__
 configs.py

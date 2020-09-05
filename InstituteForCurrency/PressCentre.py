@@ -6,7 +6,7 @@ from InstituteForCurrency.Sources.InterBank import InterBank
 from InstituteForCurrency.Sources.NBU__Currency import NBU
 from InstituteForCurrency.Sources.MasterCard import MasterCard
 from InstituteForCurrency.Sources.Visa import Visa
-from utilits.Chronometer import Chronometer
+from Arsenal.Chronometer import Chronometer
 
 
 __author__ = 'PyARK'

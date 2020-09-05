@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from utilits.log_settings import log
+from Arsenal.log_settings import log
 import threading
 from time import sleep
 

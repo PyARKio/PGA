@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from __future__ import annotations
 from BasisForCurrencies.AbstractCurrency import Currency
-from utilits.log_settings import log
+from Arsenal.log_settings import log
 
 
 __author__ = 'PyARK'
