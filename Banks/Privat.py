@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from __future__ import annotations
 from BasisForCurrencies.AbstractCurrency import Currency
-from Arsenal.log_settings import log
+from Arsenal.Chronicler import log
 from Arsenal.interrupt import Interrupt
 from Banks.PrivatBank_utilits.Currency import CurrenciesInBank
 

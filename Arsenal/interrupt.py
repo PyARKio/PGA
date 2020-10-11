@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from random import randint
 import threading
 import time
-from .log_settings import log
+from .Chronicler import log
 
 
 __author__ = "PyARKio"

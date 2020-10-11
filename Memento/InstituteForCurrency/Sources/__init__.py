@@ -1,8 +1,5 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from __future__ import annotations
-from BasisForCurrencies.AbstractCurrency import Currency
-from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'
@@ -11,5 +8,7 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class CurrenciesInBank(Currency):
-    pass
+
+
+
+
