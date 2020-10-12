@@ -2,8 +2,8 @@
 from __future__ import unicode_literals
 from InstituteForCurrency.Sources.AbstractSource import AbstractSource
 from InstituteForCurrency.Sources.AbstractSource import StructureBank
-from Memento.InstituteForCurrency.Sources.Bank import BankUSD
-from Memento.InstituteForCurrency.Sources.Bank import BankEUR
+from Memento.InstituteForCurrency.Sources.Bank import BankUSDMemento
+from Memento.InstituteForCurrency.Sources.Bank import BankEURMemento
 from Arsenal.Chronicler import log
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup
@@ -17,7 +17,7 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class Bank(AbstractSource, BankUSD, BankEUR):
+class Bank(AbstractSource, BankUSDMemento, BankEURMemento):
     def __init__(self, source, chrono):
         super().__init__()
         self.__chronometer = chrono
@@ -59,9 +59,15 @@ class Bank(AbstractSource, BankUSD, BankEUR):
             self.__usd.offer.diff = bid_offer[2]
             self.__usd.week = week[0]
 
-            self.insert_obj()
+            self.insert_obj({'time': self.__usd.time,
+                             'bid_main': self.__usd.bid.main,
+                             'bid_diff': self.__usd.bid.diff,
+                             'offer_main': self.__usd.offer.main,
+                             'offer_diff': self.__usd.offer.diff,
+                             'week': self.__usd.week})
 
             log.info(self.__usd.str)
+            log.info(self.get_all_objects())
 
             self._report['USD'] = self.__usd
 

@@ -4,7 +4,7 @@ from Arsenal.Chronicler import log
 import pymongo
 import bson
 import abc
-import config
+# import config
 
 
 __author__ = 'PyARK'
@@ -43,7 +43,7 @@ class MetaMongodbHandler(abc.ABCMeta):
 
 class BaseMongodbHandler(metaclass=MetaMongodbHandler):
     _client = pymongo.MongoClient()
-    database_name = config.MONGO_DATABASE_NAME
+    database_name = 'Currency'
 
     @staticmethod
     @abc.abstractmethod
@@ -69,6 +69,10 @@ class BaseMongodbHandler(metaclass=MetaMongodbHandler):
 
     @classmethod
     def insert_obj(cls, data):
+        log.debug('\n\n\n')
+        log.debug(cls.collection_name)
+        log.debug(data)
+
         data = cls.validate_incoming_data(data)
         result = cls.collection.insert_one(data)
         data['_id'] = result.inserted_id

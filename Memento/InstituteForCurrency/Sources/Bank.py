@@ -9,12 +9,12 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class BankUSD(BaseMongodbHandler):
+class BankUSDMemento(BaseMongodbHandler):
     collection_name = 'bank_USD'
     db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff', 'week')
 
 
-class BankEUR(BaseMongodbHandler):
+class BankEURMemento(BaseMongodbHandler):
     collection_name = 'bank_EUR'
     db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff', 'week')
 

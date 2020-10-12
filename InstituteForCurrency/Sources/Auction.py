@@ -2,6 +2,8 @@
 from __future__ import unicode_literals
 from InstituteForCurrency.Sources.AbstractSource import AbstractSource
 from InstituteForCurrency.Sources.AbstractSource import StructureAuction
+from Memento.InstituteForCurrency.Sources.Auction import AuctionUSDMemento
+from Memento.InstituteForCurrency.Sources.Auction import AuctionEURMemento
 from Arsenal.Chronicler import log
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup
@@ -16,7 +18,7 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class Auction(AbstractSource):
+class Auction(AbstractSource, AuctionUSDMemento, AuctionEURMemento):
     def __init__(self, source, chrono):
         super().__init__()
         self.__chronometer = chrono
@@ -48,6 +50,12 @@ class Auction(AbstractSource):
                     self.__usd.bid.diff = bid_offer[1]
                     self.__usd.offer.main = bid_offer[2]
                     self.__usd.offer.diff = bid_offer[3]
+
+            self.insert_obj({'time': self.__usd.time,
+                             'bid_main': self.__usd.bid.main,
+                             'bid_diff': self.__usd.bid.diff,
+                             'offer_main': self.__usd.offer.main,
+                             'offer_diff': self.__usd.offer.diff})
 
             log.info(self.__usd.str)
 
