@@ -39,6 +39,7 @@ class AbstractSource(ABC):
                 response[key] = self._report[key]
         return response
 
+    @abstractmethod
     def _add_mark(self):
         pass
 

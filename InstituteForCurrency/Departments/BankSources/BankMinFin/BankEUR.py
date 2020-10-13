@@ -5,9 +5,7 @@ from InstituteForCurrency.Departments.AbstractSource import StructureBank
 from Memento.InstituteForCurrency.Sources.Bank import BankEURMemento
 from Arsenal.Chronicler import log
 from Arsenal.URL_Object import URL
-from bs4 import BeautifulSoup
 from datetime import datetime
-import re
 
 
 __author__ = 'PyARK'
@@ -20,32 +18,15 @@ class BankEUR(AbstractSource, BankEURMemento):
     def __init__(self, source, chrono):
         super().__init__()
         self.__chronometer = chrono
-        self.__bank_usd = URL(source['USD'])
         self.__bank_eur = URL(source['EUR'])
 
-        self.__usd = StructureBank(currency='USD')
         self.__eur = StructureBank(currency='EUR')
 
-        self._report = {'USD': self.__usd,
-                        'EUR': self.__eur}
+        self._report = {'EUR': self.__eur}
 
         self._get_currency = [self.__get_eur]
 
         self._add_mark()
-
-    @staticmethod
-    def __parser(content):
-        html = BeautifulSoup(content, 'html.parser')
-        main = html.main
-        div = main.find(class_='container clearfix')
-        tbody = div.tbody
-
-        td_bid_offer = tbody.find(class_='mfm-text-nowrap')
-        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_bid_offer.text)
-        td_week = tbody.find(class_='mfcur-sparkline-indicator')
-        week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
-
-        return bid_offer, week
 
     def __get_eur(self):
         if self.__bank_eur.status():
