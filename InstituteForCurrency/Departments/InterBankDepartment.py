@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from InstituteForCurrency.Sources.AbstractSource import AbstractSource
-from InstituteForCurrency.Sources.AbstractSource import StructureInterBank
+from InstituteForCurrency.Departments.AbstractSource import AbstractSource
+from InstituteForCurrency.Departments.AbstractSource import StructureInterBank
 from Arsenal.Chronicler import log
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup

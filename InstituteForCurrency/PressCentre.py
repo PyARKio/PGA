@@ -1,11 +1,11 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from InstituteForCurrency.Sources.Auction import Auction
-from InstituteForCurrency.Sources.Bank import Bank
-from InstituteForCurrency.Sources.InterBank import InterBank
-from InstituteForCurrency.Sources.NBU__Currency import NBU
-from InstituteForCurrency.Sources.MasterCard import MasterCard
-from InstituteForCurrency.Sources.Visa import Visa
+from InstituteForCurrency.Departments.AuctionDepartment import Auction
+from InstituteForCurrency.Departments.BankDepartment import Bank
+from InstituteForCurrency.Departments.InterBankDepartment import InterBank
+from InstituteForCurrency.Departments.NBUCurrencyDepartment import NBU
+from InstituteForCurrency.Departments.MasterCardDepartment import MasterCard
+from InstituteForCurrency.Departments.VisaDepartment import Visa
 from Arsenal.Chronometer import Chronometer
 
 

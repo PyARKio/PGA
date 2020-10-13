@@ -1,15 +1,13 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from InstituteForCurrency.Sources.AbstractSource import AbstractSource
-from InstituteForCurrency.Sources.AbstractSource import StructureVisa
+from InstituteForCurrency.Departments.AbstractSource import AbstractSource
+from InstituteForCurrency.Departments.AbstractSource import StructureMasterCard
 from Arsenal.Chronicler import log
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup
 from datetime import datetime
 from random import randint
 import re
-
-import time
 
 
 __author__ = 'PyARK'
@@ -18,15 +16,15 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class Visa(AbstractSource):
+class MasterCard(AbstractSource):
     def __init__(self, source, chrono):
         super().__init__()
         self.__chronometer = chrono
-        self.__visa_usd = URL(source['USD'])
-        self.__visa_eur = URL(source['EUR'])
+        self.__mc_usd = URL(source['USD'])
+        self.__mc_eur = URL(source['EUR'])
 
-        self.__usd = StructureVisa(currency='USD')
-        self.__eur = StructureVisa(currency='EUR')
+        self.__usd = StructureMasterCard(currency='USD')
+        self.__eur = StructureMasterCard(currency='EUR')
 
         self._report = {'USD': self.__usd,
                        'EUR': self.__eur}
@@ -48,8 +46,8 @@ class Visa(AbstractSource):
         return bid_offer
 
     def __get_usd(self):
-        if self.__visa_usd.status():
-            bid_offer = self.__parser(self.__visa_usd.data['content'])
+        if self.__mc_usd.status():
+            bid_offer = self.__parser(self.__mc_usd.data['content'])
 
             self.__usd.time = datetime.now()
             self.__usd.bid.main = bid_offer[0]
@@ -62,13 +60,13 @@ class Visa(AbstractSource):
             self._report['USD'] = self.__usd
 
         else:
-            for i, v in self.__visa_usd.errors.items():
+            for i, v in self.__mc_usd.errors.items():
                 log.debug(i)
                 log.debug(v)
 
     def __get_eur(self):
-        if self.__visa_eur.status():
-            bid_offer = self.__parser(self.__visa_eur.data['content'])
+        if self.__mc_eur.status():
+            bid_offer = self.__parser(self.__mc_eur.data['content'])
 
             self.__eur.time = datetime.now()
             self.__eur.bid.main = bid_offer[0]
@@ -81,12 +79,13 @@ class Visa(AbstractSource):
             self._report['EUR'] = self.__eur
 
         else:
-            for i, v in self.__visa_eur.errors.items():
+            for i, v in self.__mc_eur.errors.items():
                 log.debug(i)
                 log.debug(v)
 
     def _add_mark(self):
         self.__chronometer.add_marks(whom=self, mark={'Position': self._set_delay(), 'CallBack': self.check})
+
 
 
 

@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from InstituteForCurrency.Sources.AbstractSource import AbstractSource
-from InstituteForCurrency.Sources.AbstractSource import StructureAuction
+from InstituteForCurrency.Departments.AbstractSource import AbstractSource
+from InstituteForCurrency.Departments.AbstractSource import StructureAuction
 from Memento.InstituteForCurrency.Sources.Auction import AuctionUSDMemento
 from Memento.InstituteForCurrency.Sources.Auction import AuctionEURMemento
 from Arsenal.Chronicler import log
