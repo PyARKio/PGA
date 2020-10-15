@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
 from InstituteForCurrency.Departments.AbstractSource import AbstractSource
-from InstituteForCurrency.Departments.AbstractSource import StructureBank
+from InstituteForCurrency.Departments.AbstractSource import StructureInterBank
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup
 import re
@@ -16,8 +16,8 @@ __status__ = "Production"
 class ABCMinFin(AbstractSource):
     def __init__(self, source, chrono):
         super().__init__(chrono)
-        self._pipe_to_bank = URL(source)
-        self._struct = StructureBank(currency=self)
+        self._pipe_to_interbank = URL(source)
+        self._struct = StructureInterBank(currency=self)
 
     @staticmethod
     def parser(content):
@@ -25,10 +25,8 @@ class ABCMinFin(AbstractSource):
         main = html.main
         div = main.find(class_='container clearfix')
         tbody = div.tbody
+        trs = tbody.findAll('tr')
+        bid = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', trs[0].find(class_='active').text)
+        offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', trs[1].find(class_='active').text)
 
-        td_bid_offer = tbody.find(class_='mfm-text-nowrap')
-        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_bid_offer.text)
-        td_week = tbody.find(class_='mfcur-sparkline-indicator')
-        week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
-
-        return bid_offer, week
+        return bid, offer

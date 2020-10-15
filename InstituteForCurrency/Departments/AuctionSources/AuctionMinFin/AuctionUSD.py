@@ -1,7 +1,7 @@
 # -- coding: utf-8 --
 from __future__ import unicode_literals
-from InstituteForCurrency.Departments.BankSources.BankMinFin.AbsMinFinBank import ABCMinFin
-from Memento.InstituteForCurrency.Departments.Bank import BankUSDMemento
+from InstituteForCurrency.Departments.AuctionSources.AuctionMinFin.AbsMinFinAuction import ABCMinFin
+from Memento.InstituteForCurrency.Departments.Auction import AuctionUSDMemento
 from Arsenal.Chronicler import log
 from datetime import datetime
 
@@ -12,33 +12,31 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class BankUSD(ABCMinFin, BankUSDMemento):    
+class AuctionUSD(ABCMinFin, AuctionUSDMemento):
     def __str__(self):
         return 'USD'
 
     def check(self):
-        if self._pipe_to_bank.status():
-            bid_offer, week = self.parser(self._pipe_to_bank.data['content'])
+        if self._pipe_to_auction.status():
+            bid_offer = self.parser(self._pipe_to_auction.data['content'])
 
             self._struct.time = datetime.now()
             self._struct.bid.main = bid_offer[0]
             self._struct.bid.diff = bid_offer[1]
-            self._struct.offer.main = bid_offer[3]
-            self._struct.offer.diff = bid_offer[2]
-            self._struct.week = week[0]
+            self._struct.offer.main = bid_offer[2]
+            self._struct.offer.diff = bid_offer[3]
 
             self.insert_obj({'time': self._struct.time,
                              'bid_main': self._struct.bid.main,
                              'bid_diff': self._struct.bid.diff,
                              'offer_main': self._struct.offer.main,
-                             'offer_diff': self._struct.offer.diff,
-                             'week': self._struct.week})
+                             'offer_diff': self._struct.offer.diff})
 
             log.info(self._struct)
             log.info(self.get_all_objects())
 
         else:
-            for i, v in self._pipe_to_bank.errors.items():
+            for i, v in self._pipe_to_auction.errors.items():
                 log.debug(i)
                 log.debug(v)
 
@@ -50,5 +48,5 @@ if __name__ == '__main__':
 
     chronometer = Chronometer()
     chronometer.start()
-    bank = BankUSD(source='https://minfin.com.ua/ua/currency/banks/usd/',
-                   chrono=chronometer)
+    bank = AuctionUSD(source='https://minfin.com.ua/ua/currency/usd/',
+                      chrono=chronometer)

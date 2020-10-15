@@ -20,29 +20,21 @@ class Runner(object):
         self.__chronometer = Chronometer()
         self.__chronometer.start()
 
-        self.__auction = Auction(source={'USD': 'https://minfin.com.ua/ua/currency/usd/',
-                                         'EUR': 'https://minfin.com.ua/ua/currency/eur/'},
-                                 chrono=self.__chronometer)
+        self.__auction = Auction(chrono=self.__chronometer)
+        self.__bank = Bank(chrono=self.__chronometer)
+        self.__inter_bank = InterBank(chrono=self.__chronometer)
 
-        self.__bank = Bank(source={'USD': 'https://minfin.com.ua/ua/currency/banks/usd/',
-                                   'EUR': 'https://minfin.com.ua/ua/currency/banks/eur/'},
-                           chrono=self.__chronometer)
+        # self.__nbu = NBU(source={'USD': 'https://minfin.com.ua/ua/currency/nbu/usd/',
+        #                          'EUR': 'https://minfin.com.ua/ua/currency/nbu/eur/'},
+        #                  chrono=self.__chronometer)
 
-        self.__inter_bank = InterBank(source={'USD': 'https://minfin.com.ua/ua/currency/mb/',
-                                              'EUR': 'https://minfin.com.ua/ua/currency/mb/eur/'},
-                                      chrono=self.__chronometer)
+        # self.__visa = Visa(source={'USD': 'https://minfin.com.ua/ua/currency/visa/usd/',
+        #                            'EUR': 'https://minfin.com.ua/ua/currency/visa/eur/'},
+        #                    chrono=self.__chronometer)
 
-        self.__nbu = NBU(source={'USD': 'https://minfin.com.ua/ua/currency/nbu/usd/',
-                                 'EUR': 'https://minfin.com.ua/ua/currency/nbu/eur/'},
-                         chrono=self.__chronometer)
-
-        self.__visa = Visa(source={'USD': 'https://minfin.com.ua/ua/currency/visa/usd/',
-                                   'EUR': 'https://minfin.com.ua/ua/currency/visa/eur/'},
-                           chrono=self.__chronometer)
-
-        self.__mastercard = MasterCard(source={'USD': 'https://minfin.com.ua/ua/currency/mastercard/usd/',
-                                               'EUR': 'https://minfin.com.ua/ua/currency/mastercard/eur/'},
-                                       chrono=self.__chronometer)
+        # self.__mastercard = MasterCard(source={'USD': 'https://minfin.com.ua/ua/currency/mastercard/usd/',
+        #                                        'EUR': 'https://minfin.com.ua/ua/currency/mastercard/eur/'},
+        #                                chrono=self.__chronometer)
 
 
 class PressCentre(Runner):

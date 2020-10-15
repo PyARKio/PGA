@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 from __future__ import annotations
 from abc import ABC, abstractmethod
-from Arsenal.Chronicler import log
 from random import randint
 
 
@@ -13,13 +12,20 @@ __status__ = "Production"
 
 
 class AbstractSource(ABC):
-    def __init__(self):
+    def __init__(self, chrono):
+        self.__chronometer = chrono
         self._delay_from = 1
         self._delay_to = 59
         self._delay = 0
 
-        self._report = {}
-        self._get_currency = []
+        self._add_mark()
+
+    @abstractmethod
+    def check(self):
+        ...
+
+    def appeal(self, letter):
+        ...
 
     def _set_delay(self):
         self._delay += randint(self._delay_from, self._delay_to)
@@ -27,21 +33,8 @@ class AbstractSource(ABC):
             self._delay -= 60
         return self._delay
 
-    def check(self):
-        for currency in self._get_currency:
-            currency()
-        self._add_mark()
-
-    def appeal(self, letter):
-        response = {}
-        for key in letter:
-            if key in self._report.keys():
-                response[key] = self._report[key]
-        return response
-
-    @abstractmethod
     def _add_mark(self):
-        pass
+        self.__chronometer.add_marks(whom=self, mark={'Position': self._set_delay(), 'CallBack': self.check})
 
 
 class MainDiff(object):
@@ -62,8 +55,7 @@ class StructureNBU(object):
         self.week = None
         self.date = None
 
-    @property
-    def str(self):
+    def __str__(self):
         return 'Currency: {}; Time: {}; {}; Week: {}; Date: {}'.\
             format(self.currency, self.time, self.official, self.week, self.date)
 
@@ -75,8 +67,7 @@ class StructureInterBank(object):
         self.bid = MainDiff('Bid')
         self.offer = MainDiff('Offer')
 
-    @property
-    def str(self):
+    def __str__(self):
         return 'Currency: {}; Time: {}; {}; {}'.format(self.currency, self.time, self.bid, self.offer)
 
 
@@ -87,8 +78,7 @@ class StructureAuction(object):
         self.bid = MainDiff('Bid')
         self.offer = MainDiff('Offer')
 
-    @property
-    def str(self):
+    def __str__(self):
         return 'Currency: {}; Time: {}; {}; {}'.format(self.currency, self.time, self.bid, self.offer)
 
 
@@ -100,8 +90,7 @@ class StructureBank(object):
         self.offer = MainDiff('Offer')
         self.week = None
 
-    @property
-    def str(self):
+    def __str__(self):
         return 'Currency: {}; Time: {}; {}; {}; Week: {}'.format(self.currency, self.time, self.bid, self.offer, self.week)
 
 
@@ -112,8 +101,7 @@ class StructureMasterCard(object):
         self.bid = MainDiff('Bid')
         self.offer = MainDiff('Offer')
 
-    @property
-    def str(self):
+    def __str__(self):
         return 'Currency: {}; Time: {}; {}; {}'.format(self.currency, self.time, self.bid, self.offer)
 
 
@@ -124,8 +112,7 @@ class StructureVisa(object):
         self.bid = MainDiff('Bid')
         self.offer = MainDiff('Offer')
 
-    @property
-    def str(self):
+    def __str__(self):
         return 'Currency: {}; Time: {}; {}; {}'.format(self.currency, self.time, self.bid, self.offer)
 
 

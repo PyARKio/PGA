@@ -9,6 +9,14 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
+class AuctionCuratorMemento(BaseMongodbHandler):
+    collection_name = 'auction_url'
+    db_fields = ('_id', 'currency',
+                 'minfin_usd', 'minfin_eur',
+                 'kurs_usd', 'kurs_eur',
+                 'finance_usd', 'finance_eur')
+
+
 class AuctionUSDMemento(BaseMongodbHandler):
     collection_name = 'auction_USD'
     db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
