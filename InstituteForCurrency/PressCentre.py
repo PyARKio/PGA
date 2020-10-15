@@ -23,18 +23,9 @@ class Runner(object):
         self.__auction = Auction(chrono=self.__chronometer)
         self.__bank = Bank(chrono=self.__chronometer)
         self.__inter_bank = InterBank(chrono=self.__chronometer)
-
-        # self.__nbu = NBU(source={'USD': 'https://minfin.com.ua/ua/currency/nbu/usd/',
-        #                          'EUR': 'https://minfin.com.ua/ua/currency/nbu/eur/'},
-        #                  chrono=self.__chronometer)
-
-        # self.__visa = Visa(source={'USD': 'https://minfin.com.ua/ua/currency/visa/usd/',
-        #                            'EUR': 'https://minfin.com.ua/ua/currency/visa/eur/'},
-        #                    chrono=self.__chronometer)
-
-        # self.__mastercard = MasterCard(source={'USD': 'https://minfin.com.ua/ua/currency/mastercard/usd/',
-        #                                        'EUR': 'https://minfin.com.ua/ua/currency/mastercard/eur/'},
-        #                                chrono=self.__chronometer)
+        self.__nbu = NBU(chrono=self.__chronometer)
+        self.__visa = Visa(chrono=self.__chronometer)
+        self.__mastercard = MasterCard(chrono=self.__chronometer)
 
 
 class PressCentre(Runner):
