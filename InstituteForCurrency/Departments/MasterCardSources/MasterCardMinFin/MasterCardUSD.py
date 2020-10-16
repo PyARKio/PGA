@@ -26,14 +26,14 @@ class MasterCardUSD(ABCMinFin, MasterCardUSDMemento):
             self._struct.offer.main = bid_offer[3]
             self._struct.offer.diff = bid_offer[2]
 
-            self.insert_obj({'time': self._struct.time,
-                             'bid_main': self._struct.bid.main,
-                             'bid_diff': self._struct.bid.diff,
-                             'offer_main': self._struct.offer.main,
-                             'offer_diff': self._struct.offer.diff})
+            self._insert_obj({'time': self._struct.time,
+                              'bid_main': self._struct.bid.main,
+                              'bid_diff': self._struct.bid.diff,
+                              'offer_main': self._struct.offer.main,
+                              'offer_diff': self._struct.offer.diff})
 
             log.info(self._struct)
-            log.info(self.get_all_objects())
+            log.info(self._get_all_objects())
 
         else:
             for i, v in self._pipe_to_mastercard.errors.items():
@@ -41,3 +41,9 @@ class MasterCardUSD(ABCMinFin, MasterCardUSDMemento):
                 log.debug(v)
 
         self._add_mark()
+
+    def appeal(self, letter):
+        answer_for_curator = self._get_all_objects()
+        # for d in answer_for_curator:
+        #     log.info(d)
+        return answer_for_curator

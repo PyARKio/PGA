@@ -27,15 +27,15 @@ class BankUSD(ABCMinFin, BankUSDMemento):
             self._struct.offer.diff = bid_offer[2]
             self._struct.week = week[0]
 
-            self.insert_obj({'time': self._struct.time,
-                             'bid_main': self._struct.bid.main,
-                             'bid_diff': self._struct.bid.diff,
-                             'offer_main': self._struct.offer.main,
-                             'offer_diff': self._struct.offer.diff,
-                             'week': self._struct.week})
+            self._insert_obj({'time': self._struct.time,
+                              'bid_main': self._struct.bid.main,
+                              'bid_diff': self._struct.bid.diff,
+                              'offer_main': self._struct.offer.main,
+                              'offer_diff': self._struct.offer.diff,
+                              'week': self._struct.week})
 
             log.info(self._struct)
-            log.info(self.get_all_objects())
+            log.info(self._get_all_objects())
 
         else:
             for i, v in self._pipe_to_bank.errors.items():
@@ -43,6 +43,12 @@ class BankUSD(ABCMinFin, BankUSDMemento):
                 log.debug(v)
 
         self._add_mark()
+
+    def appeal(self, letter):
+        answer_for_curator = self._get_all_objects()
+        # for d in answer_for_curator:
+        #     log.info(d)
+        return answer_for_curator
 
 
 if __name__ == '__main__':

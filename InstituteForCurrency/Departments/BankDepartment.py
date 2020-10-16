@@ -18,8 +18,16 @@ class Bank:
         # self.__kurs = KursCurator(chrono)
         # self.__finance = FinanceCurator(chrono)
 
+        self.__curators = {'MinFin': self.__minfin.question_to_curator,
+                           # 'Kurs': self.__minfin.question_to_curator,
+                           # 'Finance': self.__minfin.question_to_curator
+                           }
+
     def answer(self):
         ...
 
     def question(self, question):
-        ...
+        answer_to_press_centre = {}
+        for key, value in question.items():
+            answer_to_press_centre[key] = self.__curators[key](value)
+        return answer_to_press_centre

@@ -7,6 +7,7 @@ from InstituteForCurrency.Departments.NBUCurrencyDepartment import NBU
 from InstituteForCurrency.Departments.MasterCardDepartment import MasterCard
 from InstituteForCurrency.Departments.VisaDepartment import Visa
 from Arsenal.Chronometer import Chronometer
+from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'
@@ -15,7 +16,7 @@ __email__ = "fedoretss@gmail.com"
 __status__ = "Production"
 
 
-class Runner(object):
+class PressCentre:
     def __init__(self):
         self.__chronometer = Chronometer()
         self.__chronometer.start()
@@ -27,17 +28,29 @@ class Runner(object):
         self.__visa = Visa(chrono=self.__chronometer)
         self.__mastercard = MasterCard(chrono=self.__chronometer)
 
-
-class PressCentre(Runner):
-    def __init__(self):
-        super().__init__()
+        self.__departments = {'Question to Auction': self.__auction.question,
+                              'Question to Bank': self.__bank.question,
+                              'Question to InterBank': self.__inter_bank.question,
+                              'Question to NBU': self.__nbu.question,
+                              'Question to Visa': self.__visa.question,
+                              'Question to MasterCard': self.__mastercard.question}
 
     def appeal(self, letter):
-        pass
+        answer_to_user = {}
+        for key, value in letter.items():
+            log.info('')
+            log.info('Key: {}'.format(key))
+            log.info('Value: {}'.format(value))
+            if self.__departments.get(key):
+                answer_to_user[key] = self.__departments[key](value)
+        return answer_to_user
 
 
 if __name__ == '__main__':
     press = PressCentre()
-
-
-
+    log.debug(press.appeal({'Question to Auction': {'MinFin': {'USD': '', 'EUR': ''}}}))
+    log.debug(press.appeal({'Question to Bank': {'MinFin': {'USD': '', 'EUR': ''}}}))
+    log.debug(press.appeal({'Question to InterBank': {'MinFin': {'USD': '', 'EUR': ''}}}))
+    log.debug(press.appeal({'Question to NBU': {'MinFin': {'USD': '', 'EUR': ''}}}))
+    log.debug(press.appeal({'Question to Visa': {'MinFin': {'USD': '', 'EUR': ''}}}))
+    log.debug(press.appeal({'Question to MasterCard': {'MinFin': {'USD': '', 'EUR': ''}}}))

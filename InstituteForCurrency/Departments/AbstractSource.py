@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from random import randint
+from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'

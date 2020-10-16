@@ -26,14 +26,14 @@ class NBUEUR(ABCMinFin, NBUEURMemento):
             self._struct.week = nbu_week.text
             self._struct.date = tbody.small.text
 
-            self.insert_obj({'time': self._struct.time,
-                             'official_main': self._struct.official.main,
-                             'official_diff': self._struct.official.diff,
-                             'week': self._struct.week,
-                             'date': self._struct.date})
+            self._insert_obj({'time': self._struct.time,
+                              'official_main': self._struct.official.main,
+                              'official_diff': self._struct.official.diff,
+                              'week': self._struct.week,
+                              'date': self._struct.date})
 
             log.info(self._struct)
-            log.info(self.get_all_objects())
+            log.info(self._get_all_objects())
 
         else:
             for i, v in self._pipe_to_nbu.errors.items():
@@ -41,3 +41,9 @@ class NBUEUR(ABCMinFin, NBUEURMemento):
                 log.debug(v)
 
         self._add_mark()
+
+    def appeal(self, letter):
+        answer_for_curator = self._get_all_objects()
+        # for d in answer_for_curator:
+        #     log.info(d)
+        return answer_for_curator
