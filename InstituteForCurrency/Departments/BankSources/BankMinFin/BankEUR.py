@@ -45,9 +45,11 @@ class BankEUR(ABCMinFin, BankEURMemento):
         self._add_mark()
 
     def appeal(self, letter):
+        log.debug(letter)
         answer_for_curator = self._get_all_objects()
-        # for d in answer_for_curator:
-        #     log.info(d)
+        for d in answer_for_curator:
+            if letter['datetime']['from'] < d['time'] < letter['datetime']['to']:
+                log.info(d)
         return answer_for_curator
 
 
