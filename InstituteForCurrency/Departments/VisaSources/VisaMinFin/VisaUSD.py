@@ -26,7 +26,11 @@ class VisaUSD(ABCMinFin, VisaUSDMemento):
             self._struct.offer.main = bid_offer[3]
             self._struct.offer.diff = bid_offer[2]
 
-            self._insert_obj({'time': self._struct.time,
+            self._insert_obj({'YEAR': self._struct.time.year,
+                              'MONTH': self._struct.time.month,
+                              'DAY': self._struct.time.day,
+                              'HOUR': self._struct.time.hour,
+                              'time': self._struct.time,
                               'bid_main': self._struct.bid.main,
                               'bid_diff': self._struct.bid.diff,
                               'offer_main': self._struct.offer.main,

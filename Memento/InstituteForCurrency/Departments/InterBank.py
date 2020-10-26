@@ -19,9 +19,9 @@ class InterBankCuratorMemento(BaseMongodbHandler):
 
 class InterBankUSDMemento(BaseMongodbHandler):
     collection_name = 'interbank_USD'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
 
 
 class InterBankEURMemento(BaseMongodbHandler):
     collection_name = 'interbank_EUR'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')

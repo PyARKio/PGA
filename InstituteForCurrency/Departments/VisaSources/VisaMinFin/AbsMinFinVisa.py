@@ -26,6 +26,6 @@ class ABCMinFin(AbstractSource):
         div = main.find(class_='container clearfix')
         tr = div.tbody.tr
         tds = tr.findAll('td')
-        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[3].text)
+        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[2].text)
 
         return bid_offer

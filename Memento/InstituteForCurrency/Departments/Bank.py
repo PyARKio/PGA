@@ -19,9 +19,9 @@ class BankCuratorMemento(BaseMongodbHandler):
 
 class BankUSDMemento(BaseMongodbHandler):
     collection_name = 'bank_USD'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff', 'week')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff', 'week')
 
 
 class BankEURMemento(BaseMongodbHandler):
     collection_name = 'bank_EUR'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff', 'week')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff', 'week')

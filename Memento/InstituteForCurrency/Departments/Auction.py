@@ -19,12 +19,12 @@ class AuctionCuratorMemento(BaseMongodbHandler):
 
 class AuctionUSDMemento(BaseMongodbHandler):
     collection_name = 'auction_USD'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
 
 
 class AuctionEURMemento(BaseMongodbHandler):
     collection_name = 'auction_EUR'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
 
 
 

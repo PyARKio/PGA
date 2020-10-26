@@ -19,9 +19,9 @@ class MasterCardCuratorMemento(BaseMongodbHandler):
 
 class MasterCardUSDMemento(BaseMongodbHandler):
     collection_name = 'mastercard_USD'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
 
 
 class MasterCardEURMemento(BaseMongodbHandler):
     collection_name = 'mastercard_EUR'
-    db_fields = ('_id', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')
+    db_fields = ('_id', 'YEAR', 'MONTH', 'DAY', 'HOUR', 'time', 'bid_main', 'bid_diff', 'offer_main', 'offer_diff')

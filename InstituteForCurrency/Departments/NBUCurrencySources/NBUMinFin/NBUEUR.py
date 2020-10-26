@@ -26,7 +26,11 @@ class NBUEUR(ABCMinFin, NBUEURMemento):
             self._struct.week = nbu_week.text
             self._struct.date = tbody.small.text
 
-            self._insert_obj({'time': self._struct.time,
+            self._insert_obj({'YEAR': self._struct.time.year,
+                              'MONTH': self._struct.time.month,
+                              'DAY': self._struct.time.day,
+                              'HOUR': self._struct.time.hour,
+                              'time': self._struct.time,
                               'official_main': self._struct.official.main,
                               'official_diff': self._struct.official.diff,
                               'week': self._struct.week,

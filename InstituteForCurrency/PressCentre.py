@@ -50,12 +50,12 @@ class PressCentre:
 if __name__ == '__main__':
     press = PressCentre()
     # log.debug(press.appeal({'Question to Auction': {'MinFin': {'USD': '', 'EUR': ''}}}))
-    log.debug(press.appeal({'Question to Bank': {'MinFin': {'EUR': {'datetime': {'from': datetime.datetime(2020, 10, 15, 22, 2, 18, 961000),
-                                                                                 'to': datetime.datetime(2020, 10, 16, 7, 2, 18, 961000)},
-                                                                    'bid_main': [], 'bid_diff': [],
-                                                                    'offer_main': [], 'offer_diff': [],
-                                                                    'week': []}
-                                                            }}}))
+    # log.debug(press.appeal({'Question to Bank': {'MinFin': {'EUR': {'datetime': {'from': datetime.datetime(2020, 10, 15, 22, 2, 18, 961000),
+    #                                                                              'to': datetime.datetime(2020, 10, 16, 7, 2, 18, 961000)},
+    #                                                                 'bid_main': [], 'bid_diff': [],
+    #                                                                 'offer_main': [], 'offer_diff': [],
+    #                                                                 'week': []}
+    #                                                         }}}))
     # log.debug(press.appeal({'Question to InterBank': {'MinFin': {'USD': '', 'EUR': ''}}}))
     # log.debug(press.appeal({'Question to NBU': {'MinFin': {'USD': '', 'EUR': ''}}}))
     # log.debug(press.appeal({'Question to Visa': {'MinFin': {'USD': '', 'EUR': ''}}}))
