@@ -47,5 +47,12 @@ class NBUEUR(ABCMinFin, NBUEURMemento):
         self._add_mark()
 
     def appeal(self, letter):
+        """
+        - get current values
+        - get from to (how can I do it?)
+
+        :param letter:
+        :return:
+        """
         log.info(self._get_all_objects())
         return self._get_some_obj(letter)
