@@ -68,10 +68,14 @@ class BaseMongodbHandler(metaclass=MetaMongodbHandler):
         return cls.collection.find_one(filter, projection=projection)
 
     @classmethod
+    def _get_some_obj(cls, filter, projection=None):
+        return list(cls.collection.find(filter, projection=projection))
+
+    @classmethod
     def _insert_obj(cls, data):
-        log.debug('\n\n\n')
-        log.debug(cls.collection_name)
-        log.debug(data)
+        # log.debug('\n\n\n')
+        # log.debug(cls.collection_name)
+        # log.debug(data)
 
         data = cls._validate_incoming_data(data)
         result = cls.collection.insert_one(data)

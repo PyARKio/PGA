@@ -47,16 +47,4 @@ class InterBankEUR(ABCMinFin, InterBankEURMemento):
         self._add_mark()
 
     def appeal(self, letter):
-        answer_for_curator = self._get_all_objects()
-        # for d in answer_for_curator:
-        #     log.info(d)
-        return answer_for_curator
-
-
-if __name__ == '__main__':
-    from Arsenal.Chronometer import Chronometer
-
-    chronometer = Chronometer()
-    chronometer.start()
-    bank = InterBankEUR(source='https://minfin.com.ua/ua/currency/banks/eur/',
-                        chrono=chronometer)
+        ...

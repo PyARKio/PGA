@@ -47,7 +47,5 @@ class NBUEUR(ABCMinFin, NBUEURMemento):
         self._add_mark()
 
     def appeal(self, letter):
-        answer_for_curator = self._get_all_objects()
-        # for d in answer_for_curator:
-        #     log.info(d)
-        return answer_for_curator
+        log.info(self._get_all_objects())
+        return self._get_some_obj(letter)

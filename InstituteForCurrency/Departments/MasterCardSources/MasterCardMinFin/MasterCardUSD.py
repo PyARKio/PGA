@@ -47,7 +47,4 @@ class MasterCardUSD(ABCMinFin, MasterCardUSDMemento):
         self._add_mark()
 
     def appeal(self, letter):
-        answer_for_curator = self._get_all_objects()
-        # for d in answer_for_curator:
-        #     log.info(d)
-        return answer_for_curator
+        ...

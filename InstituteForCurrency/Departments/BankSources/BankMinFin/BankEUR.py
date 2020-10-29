@@ -49,18 +49,4 @@ class BankEUR(ABCMinFin, BankEURMemento):
         self._add_mark()
 
     def appeal(self, letter):
-        log.debug(letter)
-        answer_for_curator = self._get_all_objects()
-        for d in answer_for_curator:
-            if letter['datetime']['from'] < d['time'] < letter['datetime']['to']:
-                log.info(d)
-        return answer_for_curator
-
-
-if __name__ == '__main__':
-    from Arsenal.Chronometer import Chronometer
-
-    chronometer = Chronometer()
-    chronometer.start()
-    bank = BankEUR(source='https://minfin.com.ua/ua/currency/banks/eur/',
-                   chrono=chronometer)
+        ...
