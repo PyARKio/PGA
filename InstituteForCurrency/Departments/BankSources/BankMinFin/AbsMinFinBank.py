@@ -27,7 +27,11 @@ class ABCMinFin(AbstractSource):
         tbody = div.tbody
 
         td_bid_offer = tbody.find(class_='mfm-text-nowrap')
-        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_bid_offer.text)
+        try:
+            bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_bid_offer.text)
+        except Exception as err:
+            return False, False
+
         td_week = tbody.find(class_='mfcur-sparkline-indicator')
         week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
 
