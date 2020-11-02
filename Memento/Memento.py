@@ -73,9 +73,9 @@ class BaseMongodbHandler(metaclass=MetaMongodbHandler):
 
     @classmethod
     def _insert_obj(cls, data):
-        # log.debug('\n\n\n')
-        # log.debug(cls.collection_name)
-        # log.debug(data)
+        log.debug('\n')
+        log.debug(cls.collection_name)
+        log.debug(data)
 
         data = cls._validate_incoming_data(data)
         result = cls.collection.insert_one(data)
