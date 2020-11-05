@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from InstituteForCurrency.Departments.NBUCurrencySources.NBUMinFin.NBUUSD import NBUUSD
 from InstituteForCurrency.Departments.NBUCurrencySources.NBUMinFin.NBUEUR import NBUEUR
 from Memento.InstituteForCurrency.Departments.NBU_Currency import NBUCuratorMemento
-from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'

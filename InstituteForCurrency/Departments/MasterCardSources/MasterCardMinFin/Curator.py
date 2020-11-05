@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from InstituteForCurrency.Departments.MasterCardSources.MasterCardMinFin.MasterCardUSD import MasterCardUSD
 from InstituteForCurrency.Departments.MasterCardSources.MasterCardMinFin.MasterCardEUR import MasterCardEUR
 from Memento.InstituteForCurrency.Departments.MasterCard import MasterCardCuratorMemento
-from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'

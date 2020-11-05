@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from InstituteForCurrency.Departments.AuctionSources.AuctionMinFin.AuctionUSD import AuctionUSD
 from InstituteForCurrency.Departments.AuctionSources.AuctionMinFin.AuctionEUR import AuctionEUR
 from Memento.InstituteForCurrency.Departments.Auction import AuctionCuratorMemento
-from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'

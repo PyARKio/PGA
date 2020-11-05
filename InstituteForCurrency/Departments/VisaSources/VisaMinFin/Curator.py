@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from InstituteForCurrency.Departments.VisaSources.VisaMinFin.VisaUSD import VisaUSD
 from InstituteForCurrency.Departments.VisaSources.VisaMinFin.VisaEUR import VisaEUR
 from Memento.InstituteForCurrency.Departments.Visa import VisaCuratorMemento
-from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'

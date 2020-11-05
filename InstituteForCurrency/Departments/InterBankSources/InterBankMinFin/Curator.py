@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from InstituteForCurrency.Departments.InterBankSources.InterBankMinFin.InterBankUSD import InterBankUSD
 from InstituteForCurrency.Departments.InterBankSources.InterBankMinFin.InterBankEUR import InterBankEUR
 from Memento.InstituteForCurrency.Departments.InterBank import InterBankCuratorMemento
-from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'
