@@ -9,6 +9,7 @@ from InstituteForCurrency.Departments.VisaDepartment import Visa
 from Arsenal.Chronometer import Chronometer
 from Arsenal.Chronicler import log
 import datetime
+from Arsenal import GrBuild
 
 
 __author__ = 'PyARK'
@@ -49,4 +50,14 @@ class PressCentre:
 
 if __name__ == '__main__':
     press = PressCentre()
-    log.info(press.appeal({'Question to NBU': {'MinFin': {'EUR': {'MONTH': 10, 'DAY': 15}}}}))
+    log.info(press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}}))
+    # data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}})
+    # data_full = data_['Question to NBU']['MinFin']['EUR']
+    # data_official_main = [[], []]
+    # for data in data_full:
+    #     log.info(data)
+    #     log.info(data['official_main'])
+    #     data_official_main[0].append(data['time'])
+    #     data_official_main[1].append(float(data['official_main']))
+    # log.info(data_official_main)
+    # GrBuild.one_plot_for_bot(Value=data_official_main, name='NBU_EUR', sensor_name='NBU EUR')
