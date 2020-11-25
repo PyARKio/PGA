@@ -50,14 +50,200 @@ class PressCentre:
 
 if __name__ == '__main__':
     press = PressCentre()
-    log.info(press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}}))
-    # data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}})
-    # data_full = data_['Question to NBU']['MinFin']['EUR']
-    # data_official_main = [[], []]
-    # for data in data_full:
-    #     log.info(data)
-    #     log.info(data['official_main'])
-    #     data_official_main[0].append(data['time'])
-    #     data_official_main[1].append(float(data['official_main']))
-    # log.info(data_official_main)
-    # GrBuild.one_plot_for_bot(Value=data_official_main, name='NBU_EUR', sensor_name='NBU EUR')
+
+    # NBU *************************************************************************************************
+
+    data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to NBU']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['official_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='NBU_EUR', sensor_name='NBU EUR')
+
+    data_ = press.appeal({'Question to NBU': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to NBU']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['official_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='NBU_USD', sensor_name='NBU USD')
+
+    # AUCTION **********************************************************************************************
+
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to Auction']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Auction_USD_bid', sensor_name='Auction USD  BiD')
+
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to Auction']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Auction_USD_offer', sensor_name='Auction USD  OFFER')
+
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to Auction']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Auction_EUR_bid', sensor_name='Auction EUR  BiD')
+
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to Auction']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Auction_EUR_offer', sensor_name='Auction EUR  OFFER')
+
+    # BANK **********************************************************************************************
+
+    data_ = press.appeal({'Question to Bank': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to Bank']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Bank_USD_bid', sensor_name='Bank USD  BiD')
+
+    data_ = press.appeal({'Question to Bank': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to Bank']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Bank_USD_offer', sensor_name='Bank USD  OFFER')
+
+    data_ = press.appeal({'Question to Bank': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to Bank']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Bank_EUR_bid', sensor_name='Bank EUR  BiD')
+
+    data_ = press.appeal({'Question to Bank': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to Bank']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Bank_EUR_offer', sensor_name='Bank EUR  OFFER')
+
+    # VISA **********************************************************************************************
+
+    data_ = press.appeal({'Question to Visa': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to Visa']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Visa_USD_bid', sensor_name='Visa USD  BiD')
+
+    data_ = press.appeal({'Question to Visa': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to Visa']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Visa_USD_offer', sensor_name='Visa USD  OFFER')
+
+    data_ = press.appeal({'Question to Visa': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to Visa']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Visa_EUR_bid', sensor_name='Visa EUR  BiD')
+
+    data_ = press.appeal({'Question to Visa': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to Visa']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='Visa_EUR_offer', sensor_name='Visa EUR  OFFER')
+
+    # MasterCard **********************************************************************************************
+
+    data_ = press.appeal({'Question to MasterCard': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to MasterCard']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='MasterCard_USD_bid', sensor_name='MasterCard USD  BiD')
+
+    data_ = press.appeal({'Question to MasterCard': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to MasterCard']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='MasterCard_USD_offer', sensor_name='MasterCard USD  OFFER')
+
+    data_ = press.appeal({'Question to MasterCard': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to MasterCard']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='MasterCard_EUR_bid', sensor_name='MasterCard EUR  BiD')
+
+    data_ = press.appeal({'Question to MasterCard': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to MasterCard']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='MasterCard_EUR_offer', sensor_name='MasterCard EUR  OFFER')
+
+    # InterBank **********************************************************************************************
+
+    data_ = press.appeal({'Question to InterBank': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to InterBank']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='InterBank_USD_bid', sensor_name='InterBank USD  BiD')
+
+    data_ = press.appeal({'Question to InterBank': {'MinFin': {'USD': {}}}})
+    data_full = data_['Question to InterBank']['MinFin']['USD']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='InterBank_USD_offer', sensor_name='InterBank USD  OFFER')
+
+    data_ = press.appeal({'Question to InterBank': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to InterBank']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['bid_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='InterBank_EUR_bid', sensor_name='InterBank EUR  BiD')
+
+    data_ = press.appeal({'Question to InterBank': {'MinFin': {'EUR': {}}}})
+    data_full = data_['Question to InterBank']['MinFin']['EUR']
+    data_official_main = [[], []]
+    for data in data_full:
+        data_official_main[0].append(data['time'])
+        data_official_main[1].append(float(data['offer_main']))
+    GrBuild.one_plot_for_bot(Value=data_official_main, name='InterBank_EUR_offer', sensor_name='InterBank EUR  OFFER')
+
+    """
+        self.__departments = {'Question to Auction': self.__auction.question,
+                              'Question to Bank': self.__bank.question,
+                              'Question to InterBank': self.__inter_bank.question,
+                              'Question to NBU': self.__nbu.question,
+                              'Question to Visa': self.__visa.question,
+                              'Question to MasterCard': self.__mastercard.question}
+    """

@@ -23,7 +23,7 @@ def linux_distribution():
 trace_pattern = logging.Formatter("[%(asctime)s] %(levelname)s %(module)s:%(lineno)d:%(funcName)s: %(message)s")
 
 stream_handler = logging.StreamHandler()
-stream_handler.setLevel(logging.DEBUG)
+stream_handler.setLevel(logging.INFO)
 stream_handler.setFormatter(trace_pattern)
 
 log = logging.getLogger()

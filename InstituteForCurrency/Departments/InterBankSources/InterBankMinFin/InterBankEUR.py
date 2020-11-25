@@ -37,7 +37,7 @@ class InterBankEUR(ABCMinFin, InterBankEURMemento):
                               'offer_diff': self._struct.offer.diff})
 
             log.info(self._struct)
-            log.info(self._get_all_objects())
+            # log.info(self._get_all_objects())
 
         else:
             for i, v in self._pipe_to_interbank.errors.items():
@@ -47,4 +47,12 @@ class InterBankEUR(ABCMinFin, InterBankEURMemento):
         self._add_mark()
 
     def appeal(self, letter):
-        ...
+        """
+        - get current values
+        - get from to (how can I do it?)
+
+        :param letter:
+        :return:
+        """
+        log.info(self._get_all_objects())
+        return self._get_some_obj(letter)
