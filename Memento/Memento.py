@@ -72,6 +72,10 @@ class BaseMongodbHandler(metaclass=MetaMongodbHandler):
         return list(cls.collection.find(filter, projection=projection))
 
     @classmethod
+    def _get_spec(cls, filter, projection=None):
+        return list(cls.collection.aggregate(filter))
+
+    @classmethod
     def _insert_obj(cls, data):
         log.debug('\n')
         log.debug(cls.collection_name)
