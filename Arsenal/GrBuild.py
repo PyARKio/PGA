@@ -83,10 +83,10 @@ def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datet
 
     # xValue_1, xLabel_1, pattern_for_mask_1 = _handler_xticks(Value_1[1], datetime_mode)
     # xValue_2, xLabel_2, pattern_for_mask_2 = _handler_xticks(Value_2[1], datetime_mode)
-    xValue_1 = Value_1[1]
-    xValue_2 = Value_2[1]
-    yValue_1 = Value_1[0]
-    yValue_2 = Value_2[0]
+    xValue_1 = Value_1[0]
+    xValue_2 = Value_2[0]
+    yValue_1 = Value_1[1]
+    yValue_2 = Value_2[1]
 
     # search min and max
     if yLabel_1 == yLabel_2 and yLabel_1:

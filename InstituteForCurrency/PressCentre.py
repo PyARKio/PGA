@@ -54,35 +54,23 @@ if __name__ == '__main__':
     # NBU *************************************************************************************************
 
     data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': 'official_main'}}})
-    data_full = data_['Question to NBU']['MinFin']['EUR']
-    for i in data_full:
-        log.info(i)
-        log.info('Date: {}; Values: {}'.format(i['date'], i['official_main']))
-    # data_full = data_['Question to NBU']['MinFin']['EUR']
-    # data_official_main = [[], []]
-    # for data in data_full:
-    #     data_official_main[0].append(data['time'])
-    #     data_official_main[1].append(float(data['official_main']))
-    # GrBuild.one_plot_for_bot(Value=data_official_main, name='NBU_EUR', sensor_name='NBU EUR')
+    data_full = data_['Question to NBU']['MinFin']['EUR'][0]
+    GrBuild.one_plot_for_bot(Value=[data_full['date'], data_full['official_main']], name='NBU_EUR', sensor_name='NBU EUR')
 
-    # data_ = press.appeal({'Question to NBU': {'MinFin': {'USD': {}}}})
-    # data_full = data_['Question to NBU']['MinFin']['USD']
-    # data_official_main = [[], []]
-    # for data in data_full:
-    #     data_official_main[0].append(data['time'])
-    #     data_official_main[1].append(float(data['official_main']))
-    # GrBuild.one_plot_for_bot(Value=data_official_main, name='NBU_USD', sensor_name='NBU USD')
-    #
-    # # AUCTION **********************************************************************************************
-    #
-    # data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': {}}}})
-    # data_full = data_['Question to Auction']['MinFin']['USD']
-    # data_official_main = [[], []]
-    # for data in data_full:
-    #     data_official_main[0].append(data['time'])
-    #     data_official_main[1].append(float(data['bid_main']))
-    # GrBuild.one_plot_for_bot(Value=data_official_main, name='Auction_USD_bid', sensor_name='Auction USD  BiD')
-    #
+    data_ = press.appeal({'Question to NBU': {'MinFin': {'USD': 'official_main'}}})
+    data_full_nbu = data_['Question to NBU']['MinFin']['USD'][0]
+    GrBuild.one_plot_for_bot(Value=[data_full_nbu['date'], data_full_nbu['official_main']], name='NBU_USD', sensor_name='NBU USD')
+
+    # AUCTION **********************************************************************************************
+
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': 'offer_main'}}})
+    data_full_auction = data_['Question to Auction']['MinFin']['USD'][0]
+    GrBuild.one_plot_for_bot(Value=[data_full_auction['date'], data_full_auction['offer_main']], name='Auction_USD_bid', sensor_name='Auction USD  BiD')
+
+    GrBuild.two_plot_for_bot(Value_1=[data_full_nbu['date'], data_full_nbu['official_main']],
+                             Value_2=[data_full_auction['date'], data_full_auction['offer_main']],
+                             name='Auction_USD_bid', sensor_name='NBU usd  Auction usd')
+
     # data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': {}}}})
     # data_full = data_['Question to Auction']['MinFin']['USD']
     # data_official_main = [[], []]
