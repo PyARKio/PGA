@@ -23,10 +23,22 @@ class ABCMinFin(AbstractSource):
     def parser(content):
         html = BeautifulSoup(content, 'html.parser')
         main = html.main
-        div = main.find(class_='container clearfix')
+        try:
+            div = main.find(class_='container clearfix')
+        except Exception as err:
+            return False
         tbody = div.tbody
-        nbu_c = tbody.find(class_='responsive-hide td-collapsed mfm-text-nowrap mfm-text-right')
+
+        try:
+            nbu_c = tbody.find(class_='responsive-hide td-collapsed mfm-text-nowrap mfm-text-right')
+        except Exception as err:
+            return False
+
         bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', nbu_c.text)
-        nbu_week = tbody.find(class_='mfcur-sparkline-indicator')
+
+        try:
+            nbu_week = tbody.find(class_='mfcur-sparkline-indicator')
+        except Exception as err:
+            return False
 
         return nbu_week, bid_offer, tbody

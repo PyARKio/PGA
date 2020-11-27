@@ -23,8 +23,14 @@ class ABCMinFin(AbstractSource):
     def parser(content):
         html = BeautifulSoup(content, 'html.parser')
         main = html.main
-        div = main.find(class_='container clearfix')
-        tr = div.tbody.tr
+        try:
+            div = main.find(class_='container clearfix')
+        except Exception as err:
+            return False
+        try:
+            tr = div.tbody.tr
+        except Exception as err:
+            return False
         tds = tr.findAll('td')
         bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[2].text)
 

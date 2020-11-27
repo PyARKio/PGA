@@ -69,7 +69,8 @@ def one_plot_for_bot(Value, name, yLabel=None, datetime_mode='time', sensor_name
     axs.grid(grid_mode)
 
     # plt.xticks(pattern_for_mask, xValue, rotation='vertical')
-    plt.title(str(sensor_name))
+    # plt.title(str(sensor_name))
+    fig.text(0.50, 0.95, sensor_name, ha="center", va="bottom", size="medium", color=color)
 
     fig.autofmt_xdate()
     fig.tight_layout()
@@ -93,9 +94,6 @@ def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datet
         min_value_raw = min(min(y for y in yValue_1 if y is not None), min(y for y in yValue_2 if y is not None))
         max_value_raw = max(max(y for y in yValue_1 if y is not None), max(y for y in yValue_2 if y is not None))
 
-        print(min_value_raw)
-        print(max_value_raw)
-        print(max_value_raw - min_value_raw)
         diff = max_value_raw - min_value_raw
 
         min_value = min_value_raw - math.fabs(diff) * 0.15
@@ -127,14 +125,15 @@ def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datet
     axs[1].set_ylabel(yLabel_2 if yLabel_2 else 'default Y', color=color_2)
     axs[1].yaxis.set_label_position('right')
 
-    # ax.grid(grid_mode)
+    axs[0].grid(grid_mode)
+    axs[1].grid(grid_mode)
 
     # plt.xticks(pattern_for_mask_1, xValue_1, rotation='vertical')
     fig.text(0.30, 0.95, sensor_name.split('  ')[0], ha="center", va="bottom", size="medium", color=color_1)
     fig.text(0.5, 0.95, "VS", ha="center", va="bottom", size="medium")
     fig.text(0.70, 0.95, sensor_name.split('  ')[1], ha="center", va="bottom", size="medium", color=color_2)
 
-    fig.autofmt_xdate()
+    fig.autofmt_xdate(rotation=45)
     fig.tight_layout()
 
     plt.savefig(name, dpi=200)

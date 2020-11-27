@@ -95,6 +95,10 @@ class BaseMongodbHandler(metaclass=MetaMongodbHandler):
             return cls.collection.update_one({'_id': _id}, {'$set': data}, upsert=upsert)
 
     @classmethod
+    def _update_all(cls, data):
+        return cls.collection.update_many({}, {'$unset': data})
+
+    @classmethod
     def _delete_obj_by_id(cls, _id):
         if not isinstance(_id, bson.ObjectId):
             _id = bson.ObjectId(_id)

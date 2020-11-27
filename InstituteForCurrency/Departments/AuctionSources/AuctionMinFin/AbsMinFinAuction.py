@@ -22,7 +22,11 @@ class ABCMinFin(AbstractSource):
     @staticmethod
     def parser(content):
         html = BeautifulSoup(content, 'html.parser')
-        trs = html.main.tbody.findAll('tr')
+        try:
+            trs = html.main.tbody.findAll('tr')
+        except Exception as err:
+            return False
         for tr in trs:
             if 'ЧОРНИЙ РИНОК' in tr.a:
                 return re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
+        return False
