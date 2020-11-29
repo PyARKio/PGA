@@ -73,22 +73,7 @@ class BankUSD(ABCMinFin, BankUSDMemento):
         :return:
         """
 
-        import pickle
-
-        with open('BankUSD.io', 'wb') as f:
-            pickle.dump(self._get_all_objects(), f)
-
-        # log.info(self._get_all_objects())
-        # all_ = self._get_all_objects()
-        # for one in all_:
-        #     self._update_obj_by_id(_id=one['_id'], data={'week': float(one['week'])})
-        # log.info(self._get_all_objects())
-
-        # log.info(self._get_all_objects())
-        # self._update_all(data={'YEAR': 1, 'MONTH': 1, 'DAY': 1, 'HOUR': 1})
-        # log.info(self._get_all_objects())
-
-        # log.info(letter)
-        # # log.info(self._get_spec([{'$group': {'_id': {'day': {'$dayOfYear': '$time'}}, letter: {'$push': '${}'.format(letter)}, 'date': {'$push': '$time'}}}]))
-        # log.info(self._get_spec([{'$group': {'_id': None, letter: {'$push': {'$convert': {'input': '${}'.format(letter), 'to': "decimal"}}}, 'date': {'$push': '$time'}}}]))
-        # return self._get_spec([{'$group': {'_id': None, letter: {'$push': '${}'.format(letter)}, 'date': {'$push': '$time'}}}])
+        log.info(letter)
+        # log.info(self._get_spec([{'$group': {'_id': {'day': {'$dayOfYear': '$time'}}, letter: {'$push': '${}'.format(letter)}, 'date': {'$push': '$time'}}}]))
+        log.info(self._get_spec([{'$group': {'_id': None, letter: {'$push': {'$convert': {'input': '${}'.format(letter), 'to': "decimal"}}}, 'date': {'$push': '$time'}}}]))
+        return self._get_spec([{'$group': {'_id': None, letter: {'$push': '${}'.format(letter)}, 'date': {'$push': '$time'}}}])
