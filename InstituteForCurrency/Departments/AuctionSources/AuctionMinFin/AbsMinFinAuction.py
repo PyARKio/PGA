@@ -25,8 +25,11 @@ class ABCMinFin(AbstractSource):
         try:
             trs = html.main.tbody.findAll('tr')
         except Exception as err:
-            return False
+            return [None, None, None, None]
         for tr in trs:
             if 'ЧОРНИЙ РИНОК' in tr.a:
-                return re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
-        return False
+                data = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
+                if len(data) < 4:
+                    return [None, None, None, None]
+                return data
+        return [None, None, None, None]

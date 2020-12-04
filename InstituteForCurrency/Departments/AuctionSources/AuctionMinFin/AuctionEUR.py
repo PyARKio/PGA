@@ -21,6 +21,8 @@ class AuctionEUR(ABCMinFin, AuctionEURMemento):
             bid_offer = self.parser(self._pipe_to_auction.data['content'])
             if bid_offer:
 
+                log.warning(bid_offer)
+
                 self._struct.time = datetime.now()
                 self._struct.bid.main = float(bid_offer[0])
                 self._struct.bid.diff = float(bid_offer[1])
