@@ -31,5 +31,9 @@ class ABCMinFin(AbstractSource):
                 data = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
                 if len(data) < 4:
                     return [None, None, None, None]
-                return data
+
+                data_float = []
+                for d in data:
+                    data_float.append(float(d))
+                return data_float
         return [None, None, None, None]

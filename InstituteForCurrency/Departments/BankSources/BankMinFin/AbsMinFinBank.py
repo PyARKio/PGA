@@ -26,13 +26,30 @@ class ABCMinFin(AbstractSource):
         div = main.find(class_='container clearfix')
         tbody = div.tbody
 
-        td_bid_offer = tbody.find(class_='mfm-text-nowrap')
+        try:
+            td_bid_offer = tbody.find(class_='mfm-text-nowrap')
+        except Exception as err:
+            return [None, None, None, None], [None]
+
         try:
             bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_bid_offer.text)
         except Exception as err:
-            return False, False
+            return [None, None, None, None], [None]
 
-        td_week = tbody.find(class_='mfcur-sparkline-indicator')
-        week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
+        try:
+            td_week = tbody.find(class_='mfcur-sparkline-indicator')
+        except Exception as err:
+            return [None, None, None, None], [None]
+        try:
+            week = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', td_week.text)
+        except Exception as err:
+            return [None, None, None, None], [None]
+
+        bid_offer_float = []
+        week_float = []
+        for b in bid_offer:
+            bid_offer_float.append(float(b))
+        for w in week:
+            week_float.append(float(w))
 
         return bid_offer, week
