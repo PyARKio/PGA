@@ -19,39 +19,21 @@ class NBUEUR(ABCMinFin, NBUEURMemento):
     def check(self):
         if self._pipe_to_nbu.status():
             nbu_week, bid_offer, tbody = self.parser(self._pipe_to_nbu.data['content'])
-            if nbu_week and bid_offer and tbody:
 
-                self._struct.time = datetime.now()
-                self._struct.official.main = float(bid_offer[0])
-                self._struct.official.diff = float(bid_offer[1])
-                self._struct.week = float(nbu_week.text)
-                self._struct.date = tbody.small.text
+            self._struct.time = datetime.now()
+            self._struct.official.main = bid_offer[0]
+            self._struct.official.diff = bid_offer[1]
+            self._struct.week = nbu_week.text
+            self._struct.date = tbody.small.text
 
-                self._insert_obj({'time': self._struct.time,
-                                  'official_main': self._struct.official.main,
-                                  'official_diff': self._struct.official.diff,
-                                  'week': self._struct.week,
-                                  'date': self._struct.date})
+            self._insert_obj({'time': self._struct.time,
+                              'official_main': self._struct.official.main,
+                              'official_diff': self._struct.official.diff,
+                              'week': self._struct.week,
+                              'date': self._struct.date})
 
-                log.info(self._struct)
-                # log.info(self._get_all_objects())
-
-            else:
-
-                self._struct.time = datetime.now()
-                self._struct.official.main = None
-                self._struct.official.diff = None
-                self._struct.week = None
-                self._struct.date = None
-
-                self._insert_obj({'time': self._struct.time,
-                                  'official_main': self._struct.official.main,
-                                  'official_diff': self._struct.official.diff,
-                                  'week': self._struct.week,
-                                  'date': self._struct.date})
-
-                log.info(self._struct)
-                # log.info(self._get_all_objects())
+            log.info(self._struct)
+            # log.info(self._get_all_objects())
 
         else:
             for i, v in self._pipe_to_nbu.errors.items():

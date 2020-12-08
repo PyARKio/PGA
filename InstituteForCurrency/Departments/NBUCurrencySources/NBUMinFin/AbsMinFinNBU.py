@@ -26,19 +26,25 @@ class ABCMinFin(AbstractSource):
         try:
             div = main.find(class_='container clearfix')
         except Exception as err:
-            return False
+            return None, [None, None], None
         tbody = div.tbody
 
         try:
             nbu_c = tbody.find(class_='responsive-hide td-collapsed mfm-text-nowrap mfm-text-right')
         except Exception as err:
-            return False
+            return None, [None, None], None
 
-        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', nbu_c.text)
+        try:
+            bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', nbu_c.text)
+        except Exception as err:
+            return None, [None, None], None
 
         try:
             nbu_week = tbody.find(class_='mfcur-sparkline-indicator')
         except Exception as err:
-            return False
+            return None, [None, None], None
 
-        return nbu_week, bid_offer, tbody
+        bid_offer_float = []
+        for b in bid_offer:
+            bid_offer_float.append(float(b))
+        return nbu_week, bid_offer_float, tbody

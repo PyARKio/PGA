@@ -26,13 +26,19 @@ class ABCMinFin(AbstractSource):
         try:
             div = main.find(class_='container clearfix')
         except Exception as err:
-            return False
+            return [None, None, None, None]
         try:
             tr = div.tbody.tr
         except Exception as err:
-            return False
+            return [None, None, None, None]
 
         tds = tr.findAll('td')
-        bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[3].text)
+        try:
+            bid_offer = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tds[3].text)
+        except Exception as err:
+            return [None, None, None, None]
 
-        return bid_offer
+        bid_offer_float = []
+        for b in bid_offer:
+            bid_offer_float.append(float(b))
+        return bid_offer_float
