@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from InstituteForCurrency.Departments.AuctionSources.AuctionMinFin.AuctionUSD import AuctionUSD
 from InstituteForCurrency.Departments.AuctionSources.AuctionMinFin.AuctionEUR import AuctionEUR
 from Memento.InstituteForCurrency.Departments.Auction import AuctionCuratorMemento
+from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'
@@ -13,6 +14,8 @@ __status__ = "Production"
 
 class MinFinCurator(AuctionCuratorMemento):
     def __init__(self, chrono):
+        log.info('USD: {}'.format(self._get_one_obj({'currency': 'USD'})['minfin_usd']))
+        log.info('EUR: {}'.format(self._get_one_obj({'currency': 'EUR'})['minfin_eur']))
         self.__usd = AuctionUSD(source=self._get_one_obj({'currency': 'USD'})['minfin_usd'], chrono=chrono)
         self.__eur = AuctionEUR(source=self._get_one_obj({'currency': 'EUR'})['minfin_eur'], chrono=chrono)
         # self.__pln = AuctionPLN(source=self.get_one_obj({'currency': 'PLN'})['minfin_pln'], chrono=chrono)

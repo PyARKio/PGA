@@ -29,6 +29,7 @@ class ABCMinFin(AbstractSource):
         for tr in trs:
             if 'ЧОРНИЙ РИНОК' in tr.a:
                 data = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
+                # Fix it
                 if len(data) < 4:
                     return [None, None, None, None]
 
