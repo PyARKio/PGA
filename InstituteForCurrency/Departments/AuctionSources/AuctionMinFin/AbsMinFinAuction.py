@@ -5,6 +5,7 @@ from InstituteForCurrency.Departments.AbstractSource import StructureAuction
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup
 import re
+from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'
@@ -28,9 +29,11 @@ class ABCMinFin(AbstractSource):
             return [None, None, None, None]
         for tr in trs:
             if 'ЧОРНИЙ РИНОК' in tr.a:
-                data = re.findall(r'[-+]?\d{1,2}\.\d{1,3}', tr.text)
-                # Fix it
-                if len(data) < 4:
+                log.info(tr.text)
+                data = re.findall(r'[-+]?\d{1,2}\.\d{1,4}', tr.text)
+                log.info(data)
+                # TODO Fix it
+                if len(data) < 2:
                     return [None, None, None, None]
 
                 data_float = []

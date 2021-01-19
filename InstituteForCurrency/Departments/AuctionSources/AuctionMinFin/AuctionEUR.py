@@ -22,9 +22,9 @@ class AuctionEUR(ABCMinFin, AuctionEURMemento):
 
             self._struct.time = datetime.now()
             self._struct.bid.main = bid_offer[0]
-            self._struct.bid.diff = bid_offer[1]
-            self._struct.offer.main = bid_offer[2]
-            self._struct.offer.diff = bid_offer[3]
+            self._struct.bid.diff = None
+            self._struct.offer.main = bid_offer[1]
+            self._struct.offer.diff = None
 
             self._insert_obj({'time': self._struct.time,
                               'bid_main': self._struct.bid.main,
