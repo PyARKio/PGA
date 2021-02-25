@@ -63,18 +63,18 @@ if __name__ == '__main__':
     #
     # # AUCTION **********************************************************************************************
     #
-    # data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': 'offer_main'}}})
-    # data_full_auction_offer = data_['Question to Auction']['MinFin']['USD'][0]
-    # GrBuild.one_plot_for_bot(Value=[data_full_auction_offer['date'], data_full_auction_offer['offer_main']], name='Auction_USD_offer', sensor_name='Auction USD  Offer')
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': 'offer_main'}}})
+    data_full_auction_offer = data_['Question to Auction']['MinFin']['USD'][0]
+    GrBuild.one_plot_for_bot(Value=[data_full_auction_offer['date'], data_full_auction_offer['offer_main']], name='Auction_USD_offer', sensor_name='Auction USD  Offer')
     #
     # GrBuild.two_plot_for_bot(Value_1=[data_full_nbu['date'], data_full_nbu['official_main']],
     #                          Value_2=[data_full_auction_offer['date'], data_full_auction_offer['offer_main']],
     #                          yLabel_1='USD', yLabel_2='USD',
     #                          name='NBU_USD_Auction_USD_offer', sensor_name='NBU usd  Auction usd')
     #
-    # data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': 'bid_main'}}})
-    # data_full_auction_bid = data_['Question to Auction']['MinFin']['USD'][0]
-    # GrBuild.one_plot_for_bot(Value=[data_full_auction_bid['date'], data_full_auction_bid['bid_main']], name='Auction_USD_bid', sensor_name='Auction USD  BiD')
+    data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': 'bid_main'}}})
+    data_full_auction_bid = data_['Question to Auction']['MinFin']['USD'][0]
+    GrBuild.one_plot_for_bot(Value=[data_full_auction_bid['date'], data_full_auction_bid['bid_main']], name='Auction_USD_bid', sensor_name='Auction USD  BiD')
     #
     # GrBuild.two_plot_for_bot(Value_1=[data_full_auction_bid['date'], data_full_auction_bid['bid_main']],
     #                          Value_2=[data_full_auction_offer['date'], data_full_auction_offer['offer_main']],
