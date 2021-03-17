@@ -5,6 +5,7 @@ from InstituteForCurrency.Departments.AbstractSource import StructureBank
 from Arsenal.URL_Object import URL
 from bs4 import BeautifulSoup
 import re
+from Arsenal.Chronicler import log
 
 
 __author__ = 'PyARK'
@@ -23,7 +24,12 @@ class ABCMinFin(AbstractSource):
     def parser(content):
         html = BeautifulSoup(content, 'html.parser')
         main = html.main
-        div = main.find(class_='container clearfix')
+        try:
+            div = main.find(class_='container clearfix')
+        except Exception as err:
+            log.error(content)
+            return False
+
         tbody = div.tbody
 
         try:
