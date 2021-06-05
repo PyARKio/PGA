@@ -31,12 +31,12 @@ log.setLevel(logging.DEBUG)
 log.addHandler(stream_handler)
 
 if platform.system() == 'Linux':
-    file_handler = logging.handlers.RotatingFileHandler('/home/qwerty/LOGS/PersonalGovernmentAssistant.log', 'a', 10 * 1024 * 1024, 10)
+    file_handler = logging.handlers.RotatingFileHandler('/home/pyarkio/LOGS/PersonalGovernmentAssistant.log', 'a', 10 * 1024 * 1024, 10)
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(trace_pattern)
     log.addHandler(file_handler)
 elif platform.system() == 'Windows':
-    file_handler = logging.handlers.RotatingFileHandler('d:/LOGS/PersonalGovernmentAssistant.log', 'a', 10 * 1024 * 1024, 10)
+    file_handler = logging.handlers.RotatingFileHandler('d:/Projects/LOGS/PersonalGovernmentAssistant.log', 'a', 10 * 1024 * 1024, 10)
     file_handler.setLevel(logging.DEBUG)
     file_handler.setFormatter(trace_pattern)
     log.addHandler(file_handler)

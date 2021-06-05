@@ -12,6 +12,7 @@ requests = "*"
 pymongo = "*"
 seaborn = "*"
 bottle = "*"
+matplotlib = "*"
 
 [requires]
 python_version = "3.8"

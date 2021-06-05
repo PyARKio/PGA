@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from time import sleep
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as py_plt
 import time
 import math
 
@@ -56,7 +56,7 @@ def one_plot_for_bot(Value, name, yLabel=None, datetime_mode='time', sensor_name
     xValue = Value[0]
     yValue = Value[1]
 
-    fig, axs = plt.subplots()
+    fig, axs = py_plt.subplots()
 
     if type_plot == 'line':
         axs.plot(xValue, yValue, linestyle=linestyle, color=color, linewidth=linewidth)
@@ -68,14 +68,14 @@ def one_plot_for_bot(Value, name, yLabel=None, datetime_mode='time', sensor_name
     axs.set_ylabel(yLabel if yLabel else 'default Y')
     axs.grid(grid_mode)
 
-    # plt.xticks(pattern_for_mask, xValue, rotation='vertical')
-    # plt.title(str(sensor_name))
+    # py_plt.xticks(pattern_for_mask, xValue, rotation='vertical')
+    # py_plt.title(str(sensor_name))
     fig.text(0.50, 0.95, sensor_name, ha="center", va="bottom", size="medium", color=color)
 
     fig.autofmt_xdate()
     fig.tight_layout()
 
-    plt.savefig(name, dpi=200)
+    py_plt.savefig(name, dpi=200)
 
 
 def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datetime_mode='time', sensor_name='Unknown',
@@ -102,7 +102,7 @@ def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datet
         min_value = 0
         max_value = 0
 
-    fig = plt.figure()
+    fig = py_plt.figure()
     axs = list()
 
     # First curve
@@ -128,7 +128,7 @@ def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datet
     axs[0].grid(grid_mode)
     axs[1].grid(grid_mode)
 
-    # plt.xticks(pattern_for_mask_1, xValue_1, rotation='vertical')
+    # py_plt.xticks(pattern_for_mask_1, xValue_1, rotation='vertical')
     fig.text(0.30, 0.95, sensor_name.split('  ')[0], ha="center", va="bottom", size="medium", color=color_1)
     fig.text(0.5, 0.95, "VS", ha="center", va="bottom", size="medium")
     fig.text(0.70, 0.95, sensor_name.split('  ')[1], ha="center", va="bottom", size="medium", color=color_2)
@@ -136,4 +136,4 @@ def two_plot_for_bot(Value_1, Value_2, name, yLabel_1=None, yLabel_2=None, datet
     fig.autofmt_xdate(rotation=45)
     fig.tight_layout()
 
-    plt.savefig(name, dpi=200)
+    py_plt.savefig(name, dpi=200)
