@@ -54,31 +54,31 @@ if __name__ == '__main__':
 
     # # NBU *************************************************************************************************
     #
-    data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}})
-
-    with open('NBU_EUR.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': {}}}})
+    #
+    # with open('NBU_EUR.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     # data_ = press.appeal({'Question to NBU': {'MinFin': {'EUR': 'official_main'}}})
     # data_full = data_['Question to NBU']['MinFin']['EUR'][0]
     # GrBuild.one_plot_for_bot(Value=[data_full['date'], data_full['official_main']], name='NBU_EUR', sensor_name='NBU EUR')
     #
-    data_ = press.appeal({'Question to NBU': {'MinFin': {'USD': {}}}})
-
-    with open('NBU_USD.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to NBU': {'MinFin': {'USD': {}}}})
+    #
+    # with open('NBU_USD.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     # data_ = press.appeal({'Question to NBU': {'MinFin': {'USD': 'official_main'}}})
     # data_full_nbu = data_['Question to NBU']['MinFin']['USD'][0]
     # GrBuild.one_plot_for_bot(Value=[data_full_nbu['date'], data_full_nbu['official_main']], name='NBU_USD', sensor_name='NBU USD')
     #
     # # AUCTION **********************************************************************************************
     #
-    data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': {}}}})
-
-    with open('Auction_USD.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': {}}}})
+    #
+    # with open('Auction_USD.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     # data_ = press.appeal({'Question to Auction': {'MinFin': {'USD': 'offer_main'}}})
     # data_full_auction_offer = data_['Question to Auction']['MinFin']['USD'][0]
     # GrBuild.one_plot_for_bot(Value=[data_full_auction_offer['date'], data_full_auction_offer['offer_main']], name='Auction_USD_offer', sensor_name='Auction USD  Offer')
@@ -97,63 +97,63 @@ if __name__ == '__main__':
     #                          yLabel_1='USD', yLabel_2='USD',
     #                          name='Auction_USD_bid_offer', sensor_name='BID  OFFER')
     #
-    data_ = press.appeal({'Question to Auction': {'MinFin': {'EUR': {}}}})
-
-    with open('Auction_EUR.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to Auction': {'MinFin': {'EUR': {}}}})
+    #
+    # with open('Auction_EUR.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     #
     # # BANK **********************************************************************************************
     #
-    data_ = press.appeal({'Question to Bank': {'MinFin': {'USD': {}}}})
-
-    with open('Bank_USD.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to Bank': {'MinFin': {'USD': {}}}})
     #
-    data_ = press.appeal({'Question to Bank': {'MinFin': {'EUR': {}}}})
-
-    with open('Bank_EUR.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # with open('Bank_USD.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
+    #
+    # data_ = press.appeal({'Question to Bank': {'MinFin': {'EUR': {}}}})
+    #
+    # with open('Bank_EUR.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     #
     # # VISA **********************************************************************************************
     #
-    data_ = press.appeal({'Question to Visa': {'MinFin': {'USD': {}}}})
-
-    with open('Visa_USD.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to Visa': {'MinFin': {'USD': {}}}})
     #
-    data_ = press.appeal({'Question to Visa': {'MinFin': {'EUR': {}}}})
-
-    with open('Visa_EUR.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # with open('Visa_USD.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
+    #
+    # data_ = press.appeal({'Question to Visa': {'MinFin': {'EUR': {}}}})
+    #
+    # with open('Visa_EUR.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     #
     # # MasterCard **********************************************************************************************
     #
-    data_ = press.appeal({'Question to MasterCard': {'MinFin': {'USD': {}}}})
-
-    with open('MasterCard_USD.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to MasterCard': {'MinFin': {'USD': {}}}})
     #
-    data_ = press.appeal({'Question to MasterCard': {'MinFin': {'EUR': {}}}})
-
-    with open('MasterCard_EUR.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # with open('MasterCard_USD.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
+    #
+    # data_ = press.appeal({'Question to MasterCard': {'MinFin': {'EUR': {}}}})
+    #
+    # with open('MasterCard_EUR.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
     #
     # # InterBank **********************************************************************************************
     #
-    data_ = press.appeal({'Question to InterBank': {'MinFin': {'USD': {}}}})
-
-    with open('InterBank_USD.db', 'wb') as f:
-        pickle.dump(data_, f)
-
+    # data_ = press.appeal({'Question to InterBank': {'MinFin': {'USD': {}}}})
     #
-    data_ = press.appeal({'Question to InterBank': {'MinFin': {'EUR': {}}}})
-
-    with open('InterBank_EUR.db', 'wb') as f:
-        pickle.dump(data_, f)
+    # with open('InterBank_USD.db', 'wb') as f:
+    #     pickle.dump(data_, f)
+    #
+    #
+    # data_ = press.appeal({'Question to InterBank': {'MinFin': {'EUR': {}}}})
+    #
+    # with open('InterBank_EUR.db', 'wb') as f:
+    #     pickle.dump(data_, f)
